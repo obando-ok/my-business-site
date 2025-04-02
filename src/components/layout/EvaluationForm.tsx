@@ -7,8 +7,8 @@ const EvaluationForm = () => {
   const [goals, setGoals] = useState("");
   const [selectedCharacteristics, setSelectedCharacteristics] = useState<string[]>([]);
 
-  // Handle input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handle input change (for input and textarea)
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name === "name") setName(value);
     if (name === "goals") setGoals(value);
