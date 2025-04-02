@@ -1,4 +1,5 @@
 // src/components/layout/HeroSection.tsx
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -7,6 +8,7 @@ import Particles from "react-tsparticles";
 import { loadBasic } from "tsparticles-basic";
 import { useCallback } from "react";
 import type { Engine } from "tsparticles-engine";
+import EvaluationForm from "./EvaluationForm";  // Import the EvaluationForm component
 
 export default function HeroSection() {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -14,7 +16,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#f8f9fc] to-[#eef1fd] dark:from-[#0d0d0d] dark:to-[#1c1c1e]">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-animate">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -23,7 +25,7 @@ export default function HeroSection() {
           background: { color: "transparent" },
           fpsLimit: 60,
           particles: {
-            number: { value: 40 },
+            number: { value: 50 },
             size: { value: 3 },
             move: { enable: true, speed: 2 },
             links: { enable: true, distance: 130, color: "#FFFFFF", opacity: 0.2 },
@@ -54,7 +56,7 @@ export default function HeroSection() {
           transition={{ duration: 1.2, delay: 0.3 }}
           className="mt-6 text-lg text-gray-200 max-w-lg mx-auto"
         >
-          Elevate your potential through disciplined growth and relentless self-mastery
+          Elevate your potential through disciplined growth and relentless self-mastery.
         </motion.p>
 
         <motion.div
@@ -71,12 +73,15 @@ export default function HeroSection() {
           </Link>
 
           <Link
-            href="#our-philosophy"
+            href="#features"
             className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
           >
-            Our Philosophy
+            Learn More
           </Link>
         </motion.div>
+        
+        {/* Add the Evaluation Form component */}
+        <EvaluationForm />
       </div>
     </section>
   );
