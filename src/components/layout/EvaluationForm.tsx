@@ -12,7 +12,9 @@ const EvaluationForm = () => {
     stoicism: false,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     if (name === "name") setName(value);
     if (name === "goals") setGoals(value);
@@ -59,7 +61,7 @@ const EvaluationForm = () => {
             value={goals}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded-lg"
-            rows="4"
+            rows={4}
           />
         </div>
 
