@@ -38,6 +38,32 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Transparent Navbar Effects */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+
+.dark .backdrop-blur-sm {
+  backdrop-filter: blur(12px);
+}
+
+header {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -113,14 +139,6 @@ button:focus-visible,
 
 .text-secondary {
   color: var(--secondary);
-}
-
-.bg-primary {
-  background-color: var(--primary);
-}
-
-.bg-secondary {
-  background-color: var(--secondary);
 }
 
 body[data-theme="dark"] {
