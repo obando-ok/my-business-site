@@ -1,104 +1,83 @@
+// src/components/layout/HeroSection.tsx
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Particles from "react-tsparticles";
+import { loadBasic } from "tsparticles-basic";
+import { useCallback } from "react";
+import type { Engine } from "tsparticles-engine";
 
 export default function HeroSection() {
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadBasic(engine);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-[#0A0F17] overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/svg/topography.svg')] opacity-5 z-0" />
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-animate">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          fullScreen: { enable: false },
+          background: { color: "transparent" },
+          fpsLimit: 60,
+          particles: {
+            number: { value: 50 },
+            size: { value: 3 },
+            move: { enable: true, speed: 2 },
+            links: { enable: true, distance: 130, color: "#FFFFFF", opacity: 0.2 },
+            opacity: { value: 0.4 },
+          },
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+            },
+          },
+        }}
+        className="absolute inset-0 z-0"
+      />
 
-      <div className="relative z-10 max-w-6xl px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+      <div className="relative z-10 text-center px-6 max-w-3xl">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-16"
+          transition={{ duration: 1 }}
+          className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white"
         >
-          {/* Strategic Header */}
-          <div className="border-b border-[#2D3542] pb-12 mb-16">
-            <h1 className="text-6xl font-bold tracking-tight text-[#C0C6D4] mb-8">
-              <span className="block text-5xl font-medium text-[#C55A1C] mb-4">
-                EST. 2024
-              </span>
-              RECLAIMING
-              <span className="block text-7xl mt-4 text-[#D4AF37] font-black">
-                MODERN MASCULINITY
-              </span>
-            </h1>
-          </div>
+          Build smarter. Launch faster.
+        </motion.h1>
 
-          {/* Military-Grade Statement */}
-          <div className="max-w-3xl mx-auto space-y-12">
-            <div className="relative pl-8 border-l-4 border-[#C55A1C]">
-              <p className="text-2xl text-[#C0C6D4] font-medium leading-relaxed">
-                "Modern society has left young men adrift - without purpose, 
-                discipline, or connection to their core identity. We rebuild 
-                foundations."
-              </p>
-              <div className="absolute left-0 top-0 w-1 h-16 bg-[#C55A1C]" />
-            </div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className="mt-6 text-lg text-gray-200 max-w-lg mx-auto"
+        >
+          The ultimate platform to scale your business and impress your users.
+        </motion.p>
 
-            {/* Mission Briefing */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-              <div className="p-6 bg-[#1A202C] border border-[#2D3542]">
-                <h3 className="text-[#D4AF37] text-lg font-bold mb-4 flex items-center gap-2">
-                  <span className="text-[#C55A1C]">■</span> Strategic Objective
-                </h3>
-                <p className="text-[#C0C6D4] leading-relaxed">
-                  AI-driven systems forging discipline through personalized 
-                  habit optimization and value alignment.
-                </p>
-              </div>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.6 }}
+          className="mt-8 flex justify-center gap-6"
+        >
+          <Link
+            href="#get-started"
+            className="relative px-8 py-4 bg-primary text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+          >
+            <span className="absolute w-4 h-4 bg-blue-300 rounded-full animate-ripple"></span>
+            Get Started
+          </Link>
 
-              <div className="p-6 bg-[#1A202C] border border-[#2D3542]">
-                <h3 className="text-[#D4AF37] text-lg font-bold mb-4 flex items-center gap-2">
-                  <span className="text-[#C55A1C]">■</span> Brotherhood Protocol
-                </h3>
-                <p className="text-[#C0C6D4] leading-relaxed">
-                  Curated network of professionals and peers for collective 
-                  growth and accountability.
-                </p>
-              </div>
-
-              <div className="p-6 bg-[#1A202C] border border-[#2D3542]">
-                <h3 className="text-[#D4AF37] text-lg font-bold mb-4 flex items-center gap-2">
-                  <span className="text-[#C55A1C]">■</span> Foundational Doctrine
-                </h3>
-                <p className="text-[#C0C6D4] leading-relaxed">
-                  Mental resilience, physical mastery, and spiritual alignment 
-                  through evidence-based practices.
-                </p>
-              </div>
-            </div>
-
-            {/* Deployment CTA */}
-            <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              transition={{ 
-                type: "spring",
-                stiffness: 200,
-                damping: 15
-              }}
-            >
-              <Link
-                href="/deployment"
-                className="inline-block px-20 py-5 bg-[#C55A1C] text-[#0A0F17] text-xl font-bold tracking-wide 
-                         hover:bg-[#D4AF37] transition-colors duration-300 border-2 border-[#2D3542]
-                         shadow-[0_4px_24px_rgba(197,90,28,0.25)]"
-              >
-                INITIATE DEPLOYMENT
-              </Link>
-            </motion.div>
-          </div>
+          <Link
+            href="#features"
+            className="px-8 py-4 bg-secondary text-white rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
+          >
+            Learn More
+          </Link>
         </motion.div>
-      </div>
-
-      {/* Military Grade Badge */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4">
-        <div className="h-px w-24 bg-[#2D3542]" />
-        <span className="text-[#C0C6D4] text-sm tracking-[0.3em]">CLASSIFIED</span>
-        <div className="h-px w-24 bg-[#2D3542]" />
       </div>
     </section>
   );

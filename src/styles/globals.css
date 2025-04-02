@@ -1,183 +1,108 @@
-/* Core Strategic Framework */
+/* Import Tailwind */
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap');
 
+/* Color Variables */
 :root {
-  /* Military-Grade Color Matrix */
-  --battlefield: #0A0F17;       /* Base operations */
-  --forge-orange: #C55A1C;      /* Action catalyst */
-  --steel-plate: #2D3542;       /* Structural elements */
-  --commissioner-gold: #D4AF37; /* Achievement accent */
-  --night-vision: #C0C6D4;      /* Primary text */
-  --classified: #1A202C;        /* Secondary backgrounds */
-
-  /* Tactical Measurements */
-  --border-stroke: 2px;
-  --barracks-spacing: 1.25rem;
-  --stronghold-radius: 8px;
-
-  /* Typography Command Structure */
-  --font-command: 'Bebas Neue', sans-serif;
-  --font-field-manual: 'Inter', sans-serif;
+  --background: #f8f9fc; /* Light background color */
+  --foreground: #171717; /* Dark text color */
+  --primary: #6366f1; /* Stripe-like blue */
+  --secondary: #ec4899; /* Soft pinkish purple */
+  --gradient-start: #6366f1; /* Gradient start */
+  --gradient-end: #ec4899; /* Gradient end */
+  --button-bg: #6366f1; /* Button background */
+  --button-hover-bg: #4f46e5; /* Button hover color */
+  --cta-background: #C55A1C; /* CTA color */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --battlefield: #04080F;
-    --forge-orange: #DD6B20;
-    --night-vision: #A8B2D1;
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --primary: #6366f1;
+    --secondary: #ec4899;
   }
 }
 
-/* Base Soldier Template */
 body {
-  background: var(--battlefield);
-  color: var(--night-vision);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-field-manual);
-  font-weight: 450;
-  line-height: 1.75;
-  min-height: 100vh;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Strategic Typography Hierarchy */
-h1, h2, h3 {
-  font-family: var(--font-command);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-h1 {
-  font-size: 4.5rem;
-  line-height: 1;
-  background: linear-gradient(45deg, var(--forge-orange), var(--commissioner-gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-h2 {
-  font-size: 2.5rem;
-  border-left: 4px solid var(--forge-orange);
-  padding-left: var(--barracks-spacing);
-}
-
-/* Combat-Ready Components */
-.strategic-card {
-  background: var(--classified);
-  border: var(--border-stroke) solid var(--steel-plate);
-  border-radius: var(--stronghold-radius);
-  padding: 2.5rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.strategic-card:hover {
-  transform: translateY(-5px) rotateX(3deg);
-  box-shadow: 0 8px 32px rgba(197, 90, 28, 0.15);
-}
-
-/* Tactical Interface Elements */
-.cta-deployment {
-  background: var(--forge-orange);
-  color: var(--battlefield);
-  font-family: var(--font-command);
-  padding: 1.25rem 3rem;
-  border: 2px solid var(--steel-plate);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.cta-deployment::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, 
-    transparent 25%,
-    rgba(255,255,255,0.1) 50%,
-    transparent 75%
-  );
-  animation: cta-gleam 3s infinite linear;
-}
-
-@keyframes cta-gleam {
-  100% { transform: translateX(100%); }
-}
-
-/* Military Documentation Effects */
-.classified-border {
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.classified-border::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 4px;
-  background: var(--forge-orange);
-}
-
-/* Strategic Grid System */
-.tactical-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  background-image: 
-    linear-gradient(to right, var(--steel-plate) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--steel-plate) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Performance Enhancements */
-@keyframes tactical-reveal {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Secure Scroll Interface */
-::-webkit-scrollbar {
-  width: 10px;
-  background: var(--classified);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--forge-orange);
-  border: 2px solid var(--battlefield);
-  border-radius: 5px;
-}
-
-/* Mobile Command Center */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 3rem;
+/* Gradient Animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-
-  .strategic-card {
-    padding: 1.5rem;
+  50% {
+    background-position: 100% 50%;
   }
-
-  .cta-deployment {
-    padding: 1rem 2rem;
-    font-size: 0.9rem;
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-/* Classified Utilities */
-.bg-tactical-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+.bg-gradient-animate {
+  background: linear-gradient(270deg, var(--gradient-start), var(--gradient-end));
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
 }
 
-.text-command {
-  font-family: var(--font-command);
-  letter-spacing: 0.1em;
+/* Button Styles */
+button, .cta-button {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  user-select: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.border-tactical {
-  border-color: var(--steel-plate);
+button:hover,
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+button:focus,
+.cta-button:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+/* Primary Button */
+.bg-primary {
+  background-color: var(--primary);
+  color: white;
+  font-weight: bold;
+}
+
+.bg-primary:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Secondary Button */
+.bg-secondary {
+  background-color: var(--secondary);
+  color: white;
+  font-weight: bold;
+}
+
+.bg-secondary:hover {
+  background-color: #db2777; /* A darker shade of pinkish red */
+}
+
+/* Dark Mode */
+body[data-theme="dark"] {
+  background-color: var(--background);
+  color: var(--foreground);
 }
