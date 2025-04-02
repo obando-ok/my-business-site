@@ -6,17 +6,17 @@ const EvaluationForm = () => {
   const [name, setName] = useState('');
   const [goals, setGoals] = useState('');
   const [habits, setHabits] = useState('');
-  const [characteristics, setCharacteristics] = useState([]);
-  
+  const [characteristics, setCharacteristics] = useState<string[]>([]);
+
   // Handle input change
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name === "name") setName(value);
     if (name === "goals") setGoals(value);
     if (name === "habits") setHabits(value);
   };
 
-  const handleCharacteristicSelection = (e) => {
+  const handleCharacteristicSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.value;
     setCharacteristics(prev => prev.includes(selected)
       ? prev.filter(item => item !== selected)
