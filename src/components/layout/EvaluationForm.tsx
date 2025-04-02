@@ -1,4 +1,3 @@
-// src/components/layout/EvaluationForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -6,39 +5,36 @@ import { useState } from "react";
 const EvaluationForm = () => {
   const [name, setName] = useState("");
   const [goals, setGoals] = useState("");
-  const [selectedCharacteristics, setSelectedCharacteristics] = useState({
-    discipline: false,
-    leadership: false,
-    stoicism: false,
-  });
+  const [selectedCharacteristics, setSelectedCharacteristics] = useState<string[]>([]);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  // Handle input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "name") setName(value);
     if (name === "goals") setGoals(value);
   };
 
+  // Handle checkbox change
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setSelectedCharacteristics((prevState) => ({
-      ...prevState,
-      [name]: checked,
-    }));
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedCharacteristics([...selectedCharacteristics, value]);
+    } else {
+      setSelectedCharacteristics(selectedCharacteristics.filter((item) => item !== value));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Evaluation submitted!");
+    console.log("Submitted:", { name, goals, selectedCharacteristics });
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center mb-6">Self-Evaluation</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <label htmlFor="name" className="block text-lg">
+    <div className="evaluation-form-container bg-transparent text-white py-12">
+      <h2 className="text-center text-3xl font-semibold mb-8">Self-Evaluation</h2>
+      <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-transparent p-8 rounded-lg shadow-xl">
+        <div className="mb-6">
+          <label htmlFor="name" className="block text-xl font-semibold mb-2">
             Name:
           </label>
           <input
@@ -47,12 +43,12 @@ const EvaluationForm = () => {
             name="name"
             value={name}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border rounded-lg text-black"
           />
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="goals" className="block text-lg">
+        <div className="mb-6">
+          <label htmlFor="goals" className="block text-xl font-semibold mb-2">
             Goals:
           </label>
           <textarea
@@ -60,39 +56,36 @@ const EvaluationForm = () => {
             name="goals"
             value={goals}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border rounded-lg text-black"
             rows={4}
-          />
+          ></textarea>
         </div>
 
-        <div>
-          <label className="block text-lg">Choose Self-Improvement Characteristics:</label>
+        <div className="mb-6">
+          <label className="block text-xl font-semibold mb-2">Choose Self-Improvement Characteristics:</label>
           <div className="space-y-2">
-            <label className="inline-flex items-center">
+            <label>
               <input
                 type="checkbox"
-                name="discipline"
-                checked={selectedCharacteristics.discipline}
+                value="Discipline"
                 onChange={handleCheckboxChange}
                 className="mr-2"
               />
               Discipline
             </label>
-            <label className="inline-flex items-center">
+            <label>
               <input
                 type="checkbox"
-                name="leadership"
-                checked={selectedCharacteristics.leadership}
+                value="Leadership"
                 onChange={handleCheckboxChange}
                 className="mr-2"
               />
               Leadership
             </label>
-            <label className="inline-flex items-center">
+            <label>
               <input
                 type="checkbox"
-                name="stoicism"
-                checked={selectedCharacteristics.stoicism}
+                value="Stoicism"
                 onChange={handleCheckboxChange}
                 className="mr-2"
               />
@@ -101,12 +94,14 @@ const EvaluationForm = () => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-all duration-300"
-        >
-          Submit Evaluation
-        </button>
+        <div className="text-center">
+          <button
+            type="submit"
+            className="bg-blue-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-800 transition duration-300 ease-in-out"
+          >
+            Submit Evaluation
+          </button>
+        </div>
       </form>
     </div>
   );

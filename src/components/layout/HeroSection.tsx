@@ -1,5 +1,3 @@
-// src/components/layout/HeroSection.tsx
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -8,7 +6,7 @@ import Particles from "react-tsparticles";
 import { loadBasic } from "tsparticles-basic";
 import { useCallback } from "react";
 import type { Engine } from "tsparticles-engine";
-import EvaluationForm from "./EvaluationForm";  // Import the EvaluationForm component
+import EvaluationForm from "./EvaluationForm"; // Adjusted path
 
 export default function HeroSection() {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -39,7 +37,6 @@ export default function HeroSection() {
         }}
         className="absolute inset-0 z-0"
       />
-
       <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -56,7 +53,7 @@ export default function HeroSection() {
           transition={{ duration: 1.2, delay: 0.3 }}
           className="mt-6 text-lg text-gray-200 max-w-lg mx-auto"
         >
-          Elevate your potential through disciplined growth and relentless self-mastery.
+          Elevate your potential through disciplined growth and relentless self-mastery
         </motion.p>
 
         <motion.div
@@ -67,23 +64,19 @@ export default function HeroSection() {
         >
           <Link
             href="#get-started"
-            className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
+            className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out"
           >
             Get Started
           </Link>
 
           <Link
-            href="#features"
+            href="#philosophy"
             className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
           >
-            Learn More
+            Our Philosophy
           </Link>
         </motion.div>
-        
-        {/* Add the Evaluation Form component */}
-        <div className="mt-8 bg-white p-8 rounded-lg shadow-lg">
-          <EvaluationForm />
-        </div>
+        <EvaluationForm />
       </div>
     </section>
   );
