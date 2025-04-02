@@ -65,7 +65,7 @@ export default function HeroSection() {
           {/* Get Started Button */}
           <Link
             href="#get-started"
-            className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
+            className="relative px-8 py-4 bg-primary text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
           >
             <span className="absolute w-4 h-4 bg-blue-300 rounded-full animate-ripple"></span>
             Get Started

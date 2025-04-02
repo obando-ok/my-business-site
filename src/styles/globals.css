@@ -38,6 +38,33 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Transparent Navbar with Gradient */
+.navbar {
+  background: rgba(255, 255, 255, 0.5); /* Transparent white */
+  backdrop-filter: blur(10px); /* Add a slight blur to the background */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 15px 30px; /* Adjust padding for the navbar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+/* Navbar Links */
+.navbar .nav-links a {
+  color: var(--foreground);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+  color: var(--primary); /* Stripe-like hover effect */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
 /* Background Gradient Animation */
 @keyframes gradientAnimation {
   0% {
