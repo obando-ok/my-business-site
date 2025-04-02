@@ -19,6 +19,7 @@ export default function HeroSection() {
           <h1 className="text-white font-bold text-2xl">YourBusiness</h1>
         </div>
         <div className="flex space-x-8">
+          {/* Navbar links */}
           <Link href="/" className="text-white hover:text-primary">Home</Link>
           <Link href="#features" className="text-white hover:text-primary">Features</Link>
           <Link href="#docs" className="text-white hover:text-primary">Docs</Link>
