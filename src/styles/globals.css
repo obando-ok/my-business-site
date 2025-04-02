@@ -1,23 +1,19 @@
-/* Core Masculinity Framework */
+/* Core Framework - Masculinity Redefined */
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap');
 
 :root {
   /* Strategic Color Matrix */
-  --battlefield: #0a0f17;        /* Base discipline */
-  --forge-orange: #c55a1c;       /* Action catalyst */
-  --iron-gray: #2d3542;          /* Mental resilience */
-  --victory-gold: #d4af37;       /* Achievement accent */
-  --dojo-green: #3a5f50;         /* Growth indicator */
-  --sweat-silver: #c0c6d4;       /* Clarity/Process */
-  --blood-red: #8b0000;          /* Warning/Challenge */
+  --battlefield: #0a0f17;
+  --forge-orange: #c55a1c;
+  --iron-gray: #2d3542;
+  --victory-gold: #d4af37;
+  --dojo-green: #3a5f50;
+  --sweat-silver: #c0c6d4;
+  --blood-red: #8b0000;
   
   /* Combat Gradient System */
-  --gradient-rage: linear-gradient(
-    135deg,
-    var(--forge-orange) 0%,
-    var(--blood-red) 100%
-  );
+  --gradient-rage: linear-gradient(135deg, var(--forge-orange) 0%, var(--blood-red) 100%);
   
   /* Tactical Typography */
   --font-command: 'Bebas Neue', sans-serif;
@@ -30,7 +26,7 @@
   --stronghold-radius: 12px;
 }
 
-@media (prefers-color-scheme: tactical-dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --battlefield: #04080f;
     --forge-orange: #dd6b20;
@@ -39,7 +35,7 @@
   }
 }
 
-/* Base Combat Readiness */
+/* Base Warrior Template */
 body {
   background: var(--battlefield);
   color: var(--sweat-silver);
@@ -70,7 +66,72 @@ h2 {
   padding-left: var(--barracks-spacing);
 }
 
-/* Arena Components */
+/* Crisis Message Framework */
+.crisis-message {
+  background: var(--iron-gray);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--forge-orange);
+  padding: 2rem;
+  border-radius: var(--stronghold-radius);
+  position: relative;
+  margin: 3rem 0;
+}
+
+.crisis-message::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L100 50L50 100L0 50Z' fill='%23c55a1c' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.15;
+}
+
+/* Mission Declaration */
+.mission-statement {
+  background: linear-gradient(to right, var(--battlefield) 0%, var(--iron-gray) 100%);
+  border-left: 4px solid var(--victory-gold);
+  padding: 2rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.mission-statement::after {
+  content: '⚔️';
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Brotherhood CTA */
+.cta-battleplan {
+  background: var(--forge-orange);
+  color: var(--battlefield);
+  font-family: var(--font-command);
+  font-size: 1.25rem;
+  padding: 1rem 3rem;
+  border-radius: var(--stronghold-radius);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-battleplan::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
+  animation: cta-gleam 3s infinite linear;
+  transform: translateX(-100%) rotate(45deg);
+}
+
+@keyframes cta-gleam {
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* Warrior Components */
 .battle-card {
   background: var(--iron-gray);
   border: var(--border-stroke) solid var(--forge-orange);
@@ -84,174 +145,27 @@ h2 {
   box-shadow: 0 8px 32px rgba(197, 90, 28, 0.15);
 }
 
-/* War Council (Forum) */
-.forum-post {
-  background: rgba(13, 18, 27, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--forge-orange);
-  margin: 1.5rem 0;
-  padding: 1.5rem;
-  position: relative;
-}
-
-.forum-post::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--gradient-rage);
-}
-
-/* AI Command Interface */
+/* AI Mentor Interface */
 .ai-mentor-container {
-  position: relative;
-  background: linear-gradient(
-    45deg,
-    var(--battlefield) 0%,
-    var(--iron-gray) 100%
-  );
+  background: linear-gradient(45deg, var(--battlefield) 0%, var(--iron-gray) 100%);
   border-radius: var(--stronghold-radius);
-  overflow: hidden;
+  border: 1px solid var(--forge-orange);
+  position: relative;
 }
 
 .ai-mentor-container::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 75% 20%,
-    rgba(197, 90, 28, 0.15) 0%,
-    transparent 50%
-  );
+  background: radial-gradient(circle at 75% 20%, rgba(197, 90, 28, 0.15) 0%, transparent 50%);
 }
 
-/* Progress Battlemap */
+/* Progress Warfare */
 .progress-ring {
   stroke: var(--forge-orange);
   stroke-linecap: round;
   transition: stroke-dashoffset 0.85s ease-out;
   filter: drop-shadow(0 0 4px rgba(197, 90, 28, 0.4));
-}
-
-.progress-ring-background {
-  stroke: var(--iron-gray);
-  opacity: 0.8;
-}
-
-/* Brotherhood Badges */
-.achievement-badge {
-  display: inline-block;
-  padding: 0.5rem 1.25rem;
-  background: var(--iron-gray);
-  border: 1px solid var(--forge-orange);
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  position: relative;
-  overflow: hidden;
-}
-
-.achievement-badge::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(197, 90, 28, 0.15) 50%,
-    transparent 100%
-  );
-  animation: badge-gleam 3s infinite;
-}
-
-@keyframes badge-gleam {
-  100% {
-    left: 100%;
-  }
-}
-
-/* War Room Tables */
-.leaderboard-table {
-  border-collapse: collapse;
-  background: var(--battlefield);
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
-}
-
-.leaderboard-table th {
-  background: var(--iron-gray);
-  font-family: var(--font-command);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 1.25rem;
-}
-
-.leaderboard-table td {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(197, 90, 28, 0.15);
-}
-
-/* Challenge Grid */
-.challenge-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  position: relative;
-}
-
-.challenge-grid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(
-      to right,
-      var(--iron-gray) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      var(--iron-gray) 1px,
-      transparent 1px
-    );
-  background-size: 40px 40px;
-  opacity: 0.15;
-  z-index: -1;
-}
-
-/* Tactical Animations */
-@keyframes field-strike {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes medal-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-/* Advanced Responsive Command */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.75rem;
-    letter-spacing: 0.05em;
-  }
-  
-  .ai-mentor-container {
-    border-radius: 0;
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
 }
 
 /* Victory Scroll */
@@ -272,4 +186,32 @@ h2 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--victory-gold);
+}
+
+/* Mobile Command */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.75rem;
+  }
+  
+  .crisis-message {
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .mission-statement {
+    padding: 1.5rem;
+  }
+}
+
+/* Animation Arsenal */
+@keyframes medal-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes field-strike {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }

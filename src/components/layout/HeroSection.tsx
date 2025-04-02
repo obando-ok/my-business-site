@@ -1,86 +1,80 @@
+// components/HeroSection.tsx
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Particles from "react-tsparticles";
-import { loadBasic } from "tsparticles-basic";
-import { useCallback } from "react";
-import type { Engine } from "tsparticles-engine";
+import { Typewriter } from "react-simple-typewriter";
 
 export default function HeroSection() {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadBasic(engine);
-  }, []);
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#2c1a0d] to-[#5a3921]">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fullScreen: { enable: false },
-          background: { color: "transparent" },
-          fpsLimit: 60,
-          particles: {
-            number: { value: 40 },
-            size: { value: 3 },
-            move: { enable: true, speed: 1.5 },
-            links: { 
-              enable: true, 
-              distance: 150, 
-              color: "#c97d2c",
-              opacity: 0.3 
-            },
-            opacity: { value: 0.5 },
-            color: { value: "#c97d2c" },
-          },
-          interactivity: {
-            events: {
-              onhover: { enable: true, mode: "repulse" },
-            },
-          },
-        }}
-        className="absolute inset-0 z-0"
-      />
-
-      <div className="relative z-10 text-center px-6 max-w-3xl">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+    <section className="relative h-screen flex items-center justify-center bg-battlefield overflow-hidden">
+      {/* Strategic Background Elements */}
+      <div className="absolute inset-0 bg-grid-white/5 z-0" />
+      
+      {/* Core Message Container */}
+      <div className="relative z-10 max-w-5xl px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl font-bold tracking-tight text-primary"
+          className="mb-16"
         >
-          Forge Your Legacy
-        </motion.h1>
+          <h1 className="text-5xl md:text-7xl font-command mb-8 leading-tight">
+            Rebuilding
+            <span className="text-forge-orange ml-4">
+              <Typewriter
+                words={['Discipline', 'Purpose', 'Strength', 'Legacy']}
+                loop={0}
+                cursor
+                typeSpeed={70}
+                deleteSpeed={50}
+              />
+            </span>
+          </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-6 text-xl text-secondary max-w-lg mx-auto"
-        >
-          Elevate your potential through disciplined growth and relentless self-mastery
-        </motion.p>
+          {/* Crisis Statement */}
+          <div className="crisis-message bg-iron-gray/80 backdrop-blur-lg p-8 rounded-xl border border-forge-orange/30 mb-12">
+            <p className="text-sweat-silver text-xl mb-6 font-medium">
+              "Modern society has left many young men disconnected — from purpose, 
+              from discipline, from who they truly are. Surrounded by distraction 
+              and lacking direction, too many fall short of the men they were meant 
+              to become."
+            </p>
+            
+            {/* Mission Declaration */}
+            <div className="mission-statement bg-battlefield p-6 rounded-lg border-l-4 border-forge-orange">
+              <h2 className="text-3xl font-command text-victory-gold mb-4">
+                Our Ironclad Mission
+              </h2>
+              <p className="text-sweat-silver text-lg">
+                Empower the next generation through AI-driven systems that build 
+                discipline, sharpen habits, and restore authentic masculinity. 
+                This is more than an app — it's a brotherhood for forging 
+                mental, physical, and spiritual foundations.
+              </p>
+            </div>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.6 }}
-          className="mt-12 flex justify-center gap-6"
-        >
-          <Link
-            href="#get-started"
-            className="px-10 py-5 bg-primary text-white rounded-lg font-bold shadow-lg hover:bg-button-hover-bg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border-2 border-secondary"
+          {/* Call to Arms */}
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.8, repeat: Infinity, repeatType: "mirror" }}
           >
-            Begin Journey
-          </Link>
-
-          <Link
-            href="#philosophy"
-            className="px-10 py-5 bg-transparent text-primary rounded-lg font-bold border-2 border-primary hover:bg-primary/10 hover:border-secondary transition-all duration-300 ease-in-out"
-          >
-            Our Philosophy
-          </Link>
+            <Link
+              href="/initiation"
+              className="cta-battleplan inline-block px-12 py-4 bg-forge-orange text-battlefield font-command text-xl rounded-lg hover:bg-victory-gold transition-colors shadow-battle"
+            >
+              Begin Your Transformation
+            </Link>
+          </motion.div>
         </motion.div>
+      </div>
+
+      {/* Brotherhood Badge */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-sweat-silver">
+        <div className="h-px w-16 bg-forge-orange" />
+        <span className="text-sm tracking-widest">EST. 2024</span>
+        <div className="h-px w-16 bg-forge-orange" />
       </div>
     </section>
   );
