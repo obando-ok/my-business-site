@@ -20,10 +20,12 @@
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
+    "react-simple-typewriter": "^5.0.1",
     "react-tsparticles": "^2.12.2",
     "resend": "^4.2.0",
     "tsparticles-basic": "^2.12.0",
     "tsparticles-engine": "^2.12.0"
+    "react-simple-typewriter": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
