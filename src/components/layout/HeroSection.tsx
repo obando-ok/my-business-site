@@ -1,4 +1,3 @@
-// HeroSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -14,7 +13,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 dark:from-[#0d0d0d] dark:to-[#1c1c1e]">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-animate">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -25,9 +24,14 @@ export default function HeroSection() {
           particles: {
             number: { value: 50 },
             size: { value: 3 },
-            move: { enable: true, speed: 1.2 },
-            links: { enable: true, distance: 150, color: "#FFFFFF", opacity: 0.2 },
+            move: { enable: true, speed: 2 },
+            links: { enable: true, distance: 130, color: "#FFFFFF", opacity: 0.2 },
             opacity: { value: 0.4 },
+          },
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+            },
           },
         }}
         className="absolute inset-0 z-0"
@@ -58,15 +62,19 @@ export default function HeroSection() {
           transition={{ duration: 1.2, delay: 0.6 }}
           className="mt-8 flex justify-center gap-6"
         >
+          {/* Get Started Button */}
           <Link
             href="#get-started"
-            className="px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl transition-all duration-300"
+            className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
           >
+            <span className="absolute w-4 h-4 bg-blue-300 rounded-full animate-ripple"></span>
             Get Started
           </Link>
+
+          {/* Learn More Button */}
           <Link
             href="#features"
-            className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300"
+            className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
           >
             Learn More
           </Link>
