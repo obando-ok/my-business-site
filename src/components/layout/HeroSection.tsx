@@ -1,4 +1,3 @@
-// components/HeroSection.tsx
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -34,10 +33,10 @@ export default function HeroSection() {
           {/* Crisis Statement */}
           <div className="crisis-message bg-iron-gray/80 backdrop-blur-lg p-8 rounded-xl border border-forge-orange/30 mb-12">
             <p className="text-sweat-silver text-xl mb-6 font-medium">
-              "Modern society has left many young men disconnected — from purpose, 
+              &quot;Modern society has left many young men disconnected — from purpose, 
               from discipline, from who they truly are. Surrounded by distraction 
               and lacking direction, too many fall short of the men they were meant 
-              to become."
+              to become.&quot;
             </p>
             
             {/* Mission Declaration */}
@@ -48,7 +47,7 @@ export default function HeroSection() {
               <p className="text-sweat-silver text-lg">
                 Empower the next generation through AI-driven systems that build 
                 discipline, sharpen habits, and restore authentic masculinity. 
-                This is more than an app — it's a brotherhood for forging 
+                This is more than an app — it&apos;s a brotherhood for forging 
                 mental, physical, and spiritual foundations.
               </p>
             </div>
