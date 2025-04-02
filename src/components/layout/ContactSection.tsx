@@ -17,13 +17,19 @@ export default function ContactSection() {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log("Form Submitted", data);
-        resolve(data);
-      }, 1000);
+  const onSubmit = async (data: FormData) => {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
+
+    if (!res.ok) {
+      console.error("Failed to send message");
+      return;
+    }
+
+    console.log("Message sent successfully");
   };
 
   return (
