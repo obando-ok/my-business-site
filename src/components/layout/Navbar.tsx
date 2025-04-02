@@ -1,6 +1,4 @@
-// src/components/layout/Navbar.tsx
 "use client";
-
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -11,6 +9,7 @@ const navItems = [
   { label: "Features", href: "#features" },
   { label: "Docs", href: "/docs" },
   { label: "Contact", href: "#contact" },
+  { label: "Privacy", href: "#privacy" },
 ];
 
 export default function Navbar() {
