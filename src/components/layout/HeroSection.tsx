@@ -1,69 +1,82 @@
-// src/components/layout/HeroSection.tsx (or a new section like MissionSection.tsx)
 "use client";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Particles from "react-tsparticles";
+import { loadBasic } from "tsparticles-basic";
+import { useCallback } from "react";
+import type { Engine } from "tsparticles-engine";
 
-export default function MissionSection() {
+export default function HeroSection() {
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadBasic(engine);
+  }, []);
+
   return (
-    <section className="bg-gradient-animate py-16 px-6 text-center text-white">
-      <div className="max-w-3xl mx-auto">
-        <motion.h2
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-animate">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          fullScreen: { enable: false },
+          background: { color: "transparent" },
+          fpsLimit: 60,
+          particles: {
+            number: { value: 50 },
+            size: { value: 3 },
+            move: { enable: true, speed: 2 },
+            links: { enable: true, distance: 130, color: "#FFFFFF", opacity: 0.2 },
+            opacity: { value: 0.4 },
+          },
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+            },
+          },
+        }}
+        className="absolute inset-0 z-0"
+      />
+
+      <div className="relative z-10 text-center px-6 max-w-3xl">
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-4xl sm:text-5xl font-bold mb-6"
+          className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white"
         >
-          Our Mission
-        </motion.h2>
+          Build smarter. Launch faster.
+        </motion.h1>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="text-lg sm:text-xl text-gray-200"
+          className="mt-6 text-lg text-gray-200 max-w-lg mx-auto"
         >
-          Modern society has left many young men disconnected — from purpose, from discipline, from who they truly are. Surrounded by distraction and lacking direction, too many fall short of the men they were meant to become.
+          The ultimate platform to scale your business and impress your users.
         </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.6 }}
-          className="mt-6 text-lg sm:text-xl text-gray-200"
-        >
-          Our mission is to empower the next generation of men through personalized, AI-driven systems that build discipline, sharpen habits, align goals with values, and restore faith at the core of masculinity.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.9 }}
-          className="mt-6 text-lg sm:text-xl text-gray-200"
-        >
-          This platform is more than an app — it’s a brotherhood. A space to grow, learn from professionals, interact with like-minded men, and forge the mental, physical, and spiritual foundation that turns boys into strong, capable men.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 1.2 }}
-          className="mt-6 text-lg sm:text-xl text-gray-200"
-        >
-          We’re here to help men rise — and bring back the timeless masculinity that built the world we stand on today.
-        </motion.p>
-
-        {/* Optional Button */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 1.5 }}
+          transition={{ duration: 1.2, delay: 0.6 }}
           className="mt-8 flex justify-center gap-6"
         >
+          {/* Get Started Button */}
           <Link
             href="#get-started"
-            className="px-8 py-4 bg-primary text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+            className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
           >
+            <span className="absolute w-4 h-4 bg-blue-300 rounded-full animate-ripple"></span>
             Get Started
+          </Link>
+
+          {/* Learn More Button */}
+          <Link
+            href="#features"
+            className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
+          >
+            Learn More
           </Link>
         </motion.div>
       </div>
