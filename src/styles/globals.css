@@ -2,20 +2,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f9fc; /* Light background color for the main page */
-  --foreground: #171717; /* Dark text color for better contrast */
-  --primary: #6366f1; /* Stripe-like blue for buttons and highlights */
-  --secondary: #ec4899; /* Soft pinkish purple for accents */
-  --gradient-start: #6366f1; /* Starting color for gradient */
-  --gradient-end: #ec4899; /* Ending color for gradient */
-  --button-bg: #6366f1; /* Button background */
-  --button-hover-bg: #4f46e5; /* Button hover color */
+  --background: #f8f9fc;
+  --foreground: #171717;
+  --primary: #6366f1;
+  --secondary: #ec4899;
+  --gradient-start: #6366f1;
+  --gradient-end: #ec4899;
+  --button-bg: #6366f1;
+  --button-hover-bg: #4f46e5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Inter', sans-serif; /* Use 'Inter' font as it closely resembles Stripe's modern typography */
+  --font-sans: 'Inter', sans-serif;
   --font-mono: 'Menlo', monospace;
 }
 
@@ -38,7 +38,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Background Gradient Animation */
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -57,53 +56,6 @@ body {
   animation: gradientAnimation 10s ease infinite;
 }
 
-/* Navbar Styles */
-nav {
-  background: transparent;
-  box-shadow: none; /* Optional: Remove any box shadow */
-  color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50; /* Ensure it's on top */
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Navbar links */
-nav a {
-  color: white;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: var(--primary); /* Stripe-like hover effect */
-}
-
-/* Adjust the spacing and alignment of the navbar */
-nav .flex {
-  display: flex;
-  align-items: center;
-}
-
-nav .space-x-8 {
-  display: flex;
-  gap: 2rem; /* Ensure space between the items */
-}
-
-nav .text-white {
-  color: white;
-}
-
-nav .hover\:text-primary:hover {
-  color: var(--primary); /* Change the color on hover */
-}
-
-/* Button Styles */
 button, .button, .cta-button {
   font-family: var(--font-sans);
   font-weight: 600;
@@ -135,7 +87,6 @@ button:focus-visible,
   box-shadow: none;
 }
 
-/* Primary Button */
 .bg-primary {
   background-color: var(--primary);
   color: white;
@@ -146,7 +97,6 @@ button:focus-visible,
   background-color: var(--button-hover-bg);
 }
 
-/* Secondary Button */
 .bg-secondary {
   background-color: var(--secondary);
   color: white;
@@ -154,10 +104,9 @@ button:focus-visible,
 }
 
 .bg-secondary:hover {
-  background-color: #db2777; /* A darker shade of pinkish red */
+  background-color: #db2777;
 }
 
-/* Global Text Colors */
 .text-primary {
   color: var(--primary);
 }
@@ -166,7 +115,6 @@ button:focus-visible,
   color: var(--secondary);
 }
 
-/* Tailwind Customizations */
 .bg-primary {
   background-color: var(--primary);
 }
@@ -175,8 +123,13 @@ button:focus-visible,
   background-color: var(--secondary);
 }
 
-/* Dark Mode */
 body[data-theme="dark"] {
   background-color: var(--background);
   color: var(--foreground);
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--primary) !important;
+  }
 }
