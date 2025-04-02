@@ -4,16 +4,16 @@
 
 :root {
   /* Masculine Color Palette */
-  --background: #0f0f0f;        /* Rich charcoal base */
-  --foreground: #e8e0d9;        /* Warm parchment text */
-  --primary: #c97d2c;           /* Burnt orange accent */
-  --secondary: #5a3921;         /* Deep coffee brown */
-  --accent: #3c2a1d;            /* Dark leather tone */
-  --gradient-start: #2c1a0d;    /* Dark espresso */
-  --gradient-end: #5a3921;      /* Warm mahogany */
+  --background: #0f0f0f;
+  --foreground: #e8e0d9;
+  --primary: #c97d2c;
+  --secondary: #5a3921;
+  --accent: #3c2a1d;
+  --gradient-start: #2c1a0d;
+  --gradient-end: #5a3921;
   --button-bg: #c97d2c;
   --button-hover-bg: #b56d24;
-  --border-color: #362417;      /* Deep bronze */
+  --border-color: #362417;
 }
 
 @theme inline {
@@ -62,7 +62,7 @@ body {
     var(--gradient-start),
     var(--accent),
     var(--gradient-end)
-  ;
+  );
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
 }
