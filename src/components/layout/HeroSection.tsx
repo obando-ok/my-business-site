@@ -6,9 +6,10 @@ import Link from "next/link";
 import Particles from "react-tsparticles";
 import { loadBasic } from "tsparticles-basic";
 import { useCallback } from "react";
+import type { Engine } from "tsparticles-engine";
 
 export default function HeroSection() {
-  const particlesInit = useCallback(async (engine: any) => {
+  const particlesInit = useCallback(async (engine: Engine) => {
     await loadBasic(engine);
   }, []);
 

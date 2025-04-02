@@ -4,14 +4,20 @@
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 
+type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 export default function ContactSection() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormData) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         console.log("Form Submitted", data);
