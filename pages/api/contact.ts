@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       from: "Contact Form <onboarding@resend.dev>",
       to: "adambenkacem@hotmail.dk",
       subject: `New message from ${name}`,
-      reply_to: email,
+      replyTo: email,
       text: message,
     });
 
