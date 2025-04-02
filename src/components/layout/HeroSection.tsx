@@ -1,3 +1,4 @@
+// HeroSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -13,7 +14,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#f8f9fc] to-[#eef1fd] dark:from-[#0d0d0d] dark:to-[#1c1c1e]">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 dark:from-[#0d0d0d] dark:to-[#1c1c1e]">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -22,11 +23,11 @@ export default function HeroSection() {
           background: { color: "transparent" },
           fpsLimit: 60,
           particles: {
-            number: { value: 40 },
-            size: { value: 2 },
-            move: { enable: true, speed: 1 },
-            links: { enable: true, distance: 130, color: "#635bff", opacity: 0.3 },
-            opacity: { value: 0.5 },
+            number: { value: 50 },
+            size: { value: 3 },
+            move: { enable: true, speed: 1.2 },
+            links: { enable: true, distance: 150, color: "#FFFFFF", opacity: 0.2 },
+            opacity: { value: 0.4 },
           },
         }}
         className="absolute inset-0 z-0"
@@ -37,7 +38,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight text-black dark:text-white"
+          className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white"
         >
           Build smarter. Launch faster.
         </motion.h1>
@@ -46,7 +47,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-lg mx-auto"
+          className="mt-6 text-lg text-gray-200 max-w-lg mx-auto"
         >
           The ultimate platform to scale your business and impress your users.
         </motion.p>
@@ -59,7 +60,7 @@ export default function HeroSection() {
         >
           <Link
             href="#get-started"
-            className="px-8 py-4 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:shadow-2xl hover:bg-blue-700 transition-all duration-300"
+            className="px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl transition-all duration-300"
           >
             Get Started
           </Link>
