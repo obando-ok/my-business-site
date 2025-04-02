@@ -1,3 +1,5 @@
+"use client";  // This tells Next.js that this is a client-side component
+
 import { useState } from 'react';
 
 const EvaluationForm = () => {
