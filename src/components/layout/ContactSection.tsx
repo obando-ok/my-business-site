@@ -18,6 +18,8 @@ export default function ContactSection() {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
+    console.log("Submitting form with data:", data);
+
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
