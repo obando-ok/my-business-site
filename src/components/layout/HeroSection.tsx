@@ -1,4 +1,3 @@
-// src/components/layout/HeroSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -38,33 +37,35 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-4xl sm:text-6xl font-bold tracking-tight"
+          className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight text-black dark:text-white"
         >
           Build smarter. Launch faster.
         </motion.h1>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-4 text-lg text-muted-foreground"
+          className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-lg mx-auto"
         >
           The ultimate platform to scale your business and impress your users.
         </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.6 }}
-          className="mt-6 flex justify-center gap-4"
+          className="mt-8 flex justify-center gap-6"
         >
           <Link
             href="#get-started"
-            className="px-6 py-3 bg-primary text-white rounded-lg font-medium shadow-md hover:shadow-lg transition"
+            className="px-8 py-4 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:shadow-2xl hover:bg-blue-700 transition-all duration-300"
           >
             Get Started
           </Link>
           <Link
             href="#features"
-            className="px-6 py-3 bg-muted text-foreground rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300"
           >
             Learn More
           </Link>
