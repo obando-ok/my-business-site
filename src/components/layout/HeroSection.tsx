@@ -19,7 +19,6 @@ export default function HeroSection() {
           <h1 className="text-white font-bold text-2xl">YourBusiness</h1>
         </div>
         <div className="flex space-x-8">
-          {/* Corrected Navbar links */}
           <Link href="/" className="text-white hover:text-primary">Home</Link>
           <Link href="#features" className="text-white hover:text-primary">Features</Link>
           <Link href="#docs" className="text-white hover:text-primary">Docs</Link>
@@ -77,19 +76,16 @@ export default function HeroSection() {
             transition={{ duration: 1.2, delay: 0.6 }}
             className="mt-8 flex justify-center gap-6"
           >
-            {/* Get Started Button */}
             <Link
               href="#get-started"
-              className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
+              className="px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
             >
-              <span className="absolute w-4 h-4 bg-blue-300 rounded-full animate-ripple"></span>
               Get Started
             </Link>
 
-            {/* Learn More Button */}
             <Link
               href="#features"
-              className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
+              className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 transition-all duration-300 ease-in-out"
             >
               Learn More
             </Link>
