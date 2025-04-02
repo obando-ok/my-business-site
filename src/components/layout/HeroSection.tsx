@@ -1,84 +1,69 @@
+// src/components/layout/HeroSection.tsx (or a new section like MissionSection.tsx)
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Particles from "react-tsparticles";
-import { loadBasic } from "tsparticles-basic";
-import { useCallback } from "react";
-import type { Engine } from "tsparticles-engine";
 
-export default function HeroSection() {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadBasic(engine);
-  }, []);
-
+export default function MissionSection() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#2c1a0d] to-[#5a3921]">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fullScreen: { enable: false },
-          background: { color: "transparent" },
-          fpsLimit: 60,
-          particles: {
-            number: { value: 40 },
-            size: { value: 3 },
-            move: { enable: true, speed: 1.5 },
-            links: { 
-              enable: true, 
-              distance: 150, 
-              color: "#c97d2c",
-              opacity: 0.3 
-            },
-            opacity: { value: 0.5 },
-            color: { value: "#c97d2c" },
-          },
-          interactivity: {
-            events: {
-              onhover: { enable: true, mode: "repulse" },
-            },
-          },
-        }}
-        className="absolute inset-0 z-0"
-      />
-
-      <div className="relative z-10 text-center px-6 max-w-3xl">
-        <motion.h1
+    <section className="bg-gradient-animate py-16 px-6 text-center text-white">
+      <div className="max-w-3xl mx-auto">
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl font-bold tracking-tight text-primary"
+          className="text-4xl sm:text-5xl font-bold mb-6"
         >
-          Forge Your Legacy
-        </motion.h1>
-
+          Our Mission
+        </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-6 text-xl text-secondary max-w-lg mx-auto"
+          className="text-lg sm:text-xl text-gray-200"
         >
-          Elevate your potential through disciplined growth and relentless self-mastery
+          Modern society has left many young men disconnected — from purpose, from discipline, from who they truly are. Surrounded by distraction and lacking direction, too many fall short of the men they were meant to become.
         </motion.p>
 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.6 }}
+          className="mt-6 text-lg sm:text-xl text-gray-200"
+        >
+          Our mission is to empower the next generation of men through personalized, AI-driven systems that build discipline, sharpen habits, align goals with values, and restore faith at the core of masculinity.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.9 }}
+          className="mt-6 text-lg sm:text-xl text-gray-200"
+        >
+          This platform is more than an app — it’s a brotherhood. A space to grow, learn from professionals, interact with like-minded men, and forge the mental, physical, and spiritual foundation that turns boys into strong, capable men.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 1.2 }}
+          className="mt-6 text-lg sm:text-xl text-gray-200"
+        >
+          We’re here to help men rise — and bring back the timeless masculinity that built the world we stand on today.
+        </motion.p>
+
+        {/* Optional Button */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.6 }}
-          className="mt-12 flex justify-center gap-6"
+          transition={{ duration: 1.2, delay: 1.5 }}
+          className="mt-8 flex justify-center gap-6"
         >
           <Link
             href="#get-started"
-            className="px-10 py-5 bg-primary text-white rounded-lg font-bold shadow-lg hover:bg-button-hover-bg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border-2 border-secondary"
+            className="px-8 py-4 bg-primary text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
           >
-            Begin Journey
-          </Link>
-
-          <Link
-            href="#philosophy"
-            className="px-10 py-5 bg-transparent text-primary rounded-lg font-bold border-2 border-primary hover:bg-primary/10 hover:border-secondary transition-all duration-300 ease-in-out"
-          >
-            Our Philosophy
+            Get Started
           </Link>
         </motion.div>
       </div>
