@@ -84,6 +84,25 @@ nav a:hover {
   color: var(--primary); /* Stripe-like hover effect */
 }
 
+/* Adjust the spacing and alignment of the navbar */
+nav .flex {
+  display: flex;
+  align-items: center;
+}
+
+nav .space-x-8 {
+  display: flex;
+  gap: 2rem; /* Ensure space between the items */
+}
+
+nav .text-white {
+  color: white;
+}
+
+nav .hover\:text-primary:hover {
+  color: var(--primary); /* Change the color on hover */
+}
+
 /* Button Styles */
 button, .button, .cta-button {
   font-family: var(--font-sans);
