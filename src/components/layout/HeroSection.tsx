@@ -1,11 +1,10 @@
-"use client";
-
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Particles from "react-tsparticles";
 import { loadBasic } from "tsparticles-basic";
 import { useCallback } from "react";
 import type { Engine } from "tsparticles-engine";
+import EvaluationForm from './EvaluationForm';  // Import the EvaluationForm
 
 export default function HeroSection() {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -24,15 +23,9 @@ export default function HeroSection() {
           particles: {
             number: { value: 50 },
             size: { value: 3 },
-            move: { enable: true, speed: 1.5 },
-            links: { 
-              enable: true, 
-              distance: 150, 
-              color: "#c97d2c", 
-              opacity: 0.3 
-            },
-            opacity: { value: 0.5 },
-            color: { value: "#c97d2c" },
+            move: { enable: true, speed: 2 },
+            links: { enable: true, distance: 130, color: "#FFFFFF", opacity: 0.2 },
+            opacity: { value: 0.4 },
           },
           interactivity: {
             events: {
@@ -48,40 +41,46 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl font-bold tracking-tight text-white"
+          className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white"
         >
-          Forge Your Legacy
+          Build smarter. Launch faster.
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-6 text-xl text-gray-200 max-w-lg mx-auto"
+          className="mt-6 text-lg text-gray-200 max-w-lg mx-auto"
         >
-          Elevate your potential through disciplined growth and relentless self-mastery
+          The ultimate platform to scale your business and impress your users.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.6 }}
-          className="mt-12 flex justify-center gap-6"
+          className="mt-8 flex justify-center gap-6"
         >
+          {/* Get Started Button */}
           <Link
             href="#get-started"
-            className="px-10 py-5 bg-primary text-white rounded-lg font-bold shadow-lg hover:bg-button-hover-bg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border-2 border-secondary"
+            className="relative px-8 py-4 bg-blue-700 text-white rounded-full font-semibold shadow-lg hover:bg-blue-800 hover:shadow-2xl hover:scale-105 hover:border-4 hover:border-blue-300 hover:text-shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
           >
-            Begin Journey
+            <span className="absolute w-4 h-4 bg-blue-300 rounded-full animate-ripple"></span>
+            Get Started
           </Link>
 
+          {/* Learn More Button */}
           <Link
-            href="#philosophy"
-            className="px-10 py-5 bg-transparent text-primary rounded-lg font-bold border-2 border-primary hover:bg-primary/10 hover:border-secondary transition-all duration-300 ease-in-out"
+            href="#features"
+            className="px-8 py-4 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out"
           >
-            Our Philosophy
+            Learn More
           </Link>
         </motion.div>
+
+        {/* Insert the Evaluation Form */}
+        <EvaluationForm />
       </div>
     </section>
   );
