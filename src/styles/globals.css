@@ -58,6 +58,7 @@ button, .button, .cta-button {
   font-weight: 600;
   cursor: pointer;
   outline: none; /* Remove outline on focus */
+  border: none; /* Remove any border that may be causing the issue */
 }
 
 button:hover,
@@ -71,6 +72,7 @@ button:focus,
 .cta-button:focus {
   outline: none; /* Remove the focus outline */
   box-shadow: none; /* Optionally remove shadow on focus */
+  border: none; /* Ensure no border */
 }
 
 /* Tailwind Customizations */
