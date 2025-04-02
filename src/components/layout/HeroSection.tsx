@@ -81,7 +81,9 @@ export default function HeroSection() {
         </motion.div>
         
         {/* Add the Evaluation Form component */}
-        <EvaluationForm />
+        <div className="mt-8 bg-white p-8 rounded-lg shadow-lg">
+          <EvaluationForm />
+        </div>
       </div>
     </section>
   );
