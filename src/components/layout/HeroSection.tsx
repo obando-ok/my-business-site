@@ -4,7 +4,7 @@ import Particles from "react-tsparticles";
 import { loadBasic } from "tsparticles-basic";
 import { useCallback } from "react";
 import type { Engine } from "tsparticles-engine";
-import EvaluationForm from './EvaluationForm';  // Import the EvaluationForm
+import EvaluationForm from './EvaluationForm';
 
 export default function HeroSection() {
   const particlesInit = useCallback(async (engine: Engine) => {
