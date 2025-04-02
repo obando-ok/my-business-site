@@ -1,79 +1,104 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Typewriter } from "react-simple-typewriter";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen flex items-center justify-center bg-battlefield overflow-hidden">
-      {/* Strategic Background Elements */}
-      <div className="absolute inset-0 bg-grid-white/5 z-0" />
-      
-      {/* Core Message Container */}
-      <div className="relative z-10 max-w-5xl px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="mb-16"
-        >
-          <h1 className="text-5xl md:text-7xl font-command mb-8 leading-tight">
-            Rebuilding
-            <span className="text-forge-orange ml-4">
-              <Typewriter
-                words={['Discipline', 'Purpose', 'Strength', 'Legacy']}
-                loop={0}
-                cursor
-                typeSpeed={70}
-                deleteSpeed={50}
-              />
-            </span>
-          </h1>
+    <section className="relative min-h-screen flex items-center justify-center bg-[#0A0F17] overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/svg/topography.svg')] opacity-5 z-0" />
 
-          {/* Crisis Statement */}
-          <div className="crisis-message bg-iron-gray/80 backdrop-blur-lg p-8 rounded-xl border border-forge-orange/30 mb-12">
-            <p className="text-sweat-silver text-xl mb-6 font-medium">
-              &quot;Modern society has left many young men disconnected — from purpose, 
-              from discipline, from who they truly are. Surrounded by distraction 
-              and lacking direction, too many fall short of the men they were meant 
-              to become.&quot;
-            </p>
-            
-            {/* Mission Declaration */}
-            <div className="mission-statement bg-battlefield p-6 rounded-lg border-l-4 border-forge-orange">
-              <h2 className="text-3xl font-command text-victory-gold mb-4">
-                Our Ironclad Mission
-              </h2>
-              <p className="text-sweat-silver text-lg">
-                Empower the next generation through AI-driven systems that build 
-                discipline, sharpen habits, and restore authentic masculinity. 
-                This is more than an app — it&apos;s a brotherhood for forging 
-                mental, physical, and spiritual foundations.
-              </p>
-            </div>
+      <div className="relative z-10 max-w-6xl px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="space-y-16"
+        >
+          {/* Strategic Header */}
+          <div className="border-b border-[#2D3542] pb-12 mb-16">
+            <h1 className="text-6xl font-bold tracking-tight text-[#C0C6D4] mb-8">
+              <span className="block text-5xl font-medium text-[#C55A1C] mb-4">
+                EST. 2024
+              </span>
+              RECLAIMING
+              <span className="block text-7xl mt-4 text-[#D4AF37] font-black">
+                MODERN MASCULINITY
+              </span>
+            </h1>
           </div>
 
-          {/* Call to Arms */}
-          <motion.div
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.8, repeat: Infinity, repeatType: "mirror" }}
-          >
-            <Link
-              href="/initiation"
-              className="cta-battleplan inline-block px-12 py-4 bg-forge-orange text-battlefield font-command text-xl rounded-lg hover:bg-victory-gold transition-colors shadow-battle"
+          {/* Military-Grade Statement */}
+          <div className="max-w-3xl mx-auto space-y-12">
+            <div className="relative pl-8 border-l-4 border-[#C55A1C]">
+              <p className="text-2xl text-[#C0C6D4] font-medium leading-relaxed">
+                "Modern society has left young men adrift - without purpose, 
+                discipline, or connection to their core identity. We rebuild 
+                foundations."
+              </p>
+              <div className="absolute left-0 top-0 w-1 h-16 bg-[#C55A1C]" />
+            </div>
+
+            {/* Mission Briefing */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+              <div className="p-6 bg-[#1A202C] border border-[#2D3542]">
+                <h3 className="text-[#D4AF37] text-lg font-bold mb-4 flex items-center gap-2">
+                  <span className="text-[#C55A1C]">■</span> Strategic Objective
+                </h3>
+                <p className="text-[#C0C6D4] leading-relaxed">
+                  AI-driven systems forging discipline through personalized 
+                  habit optimization and value alignment.
+                </p>
+              </div>
+
+              <div className="p-6 bg-[#1A202C] border border-[#2D3542]">
+                <h3 className="text-[#D4AF37] text-lg font-bold mb-4 flex items-center gap-2">
+                  <span className="text-[#C55A1C]">■</span> Brotherhood Protocol
+                </h3>
+                <p className="text-[#C0C6D4] leading-relaxed">
+                  Curated network of professionals and peers for collective 
+                  growth and accountability.
+                </p>
+              </div>
+
+              <div className="p-6 bg-[#1A202C] border border-[#2D3542]">
+                <h3 className="text-[#D4AF37] text-lg font-bold mb-4 flex items-center gap-2">
+                  <span className="text-[#C55A1C]">■</span> Foundational Doctrine
+                </h3>
+                <p className="text-[#C0C6D4] leading-relaxed">
+                  Mental resilience, physical mastery, and spiritual alignment 
+                  through evidence-based practices.
+                </p>
+              </div>
+            </div>
+
+            {/* Deployment CTA */}
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 200,
+                damping: 15
+              }}
             >
-              Begin Your Transformation
-            </Link>
-          </motion.div>
+              <Link
+                href="/deployment"
+                className="inline-block px-20 py-5 bg-[#C55A1C] text-[#0A0F17] text-xl font-bold tracking-wide 
+                         hover:bg-[#D4AF37] transition-colors duration-300 border-2 border-[#2D3542]
+                         shadow-[0_4px_24px_rgba(197,90,28,0.25)]"
+              >
+                INITIATE DEPLOYMENT
+              </Link>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
-      {/* Brotherhood Badge */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-sweat-silver">
-        <div className="h-px w-16 bg-forge-orange" />
-        <span className="text-sm tracking-widest">EST. 2024</span>
-        <div className="h-px w-16 bg-forge-orange" />
+      {/* Military Grade Badge */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4">
+        <div className="h-px w-24 bg-[#2D3542]" />
+        <span className="text-[#C0C6D4] text-sm tracking-[0.3em]">CLASSIFIED</span>
+        <div className="h-px w-24 bg-[#2D3542]" />
       </div>
     </section>
   );

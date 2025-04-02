@@ -1,217 +1,183 @@
-/* Core Framework - Masculinity Redefined */
+/* Core Strategic Framework */
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-  /* Strategic Color Matrix */
-  --battlefield: #0a0f17;
-  --forge-orange: #c55a1c;
-  --iron-gray: #2d3542;
-  --victory-gold: #d4af37;
-  --dojo-green: #3a5f50;
-  --sweat-silver: #c0c6d4;
-  --blood-red: #8b0000;
-  
-  /* Combat Gradient System */
-  --gradient-rage: linear-gradient(135deg, var(--forge-orange) 0%, var(--blood-red) 100%);
-  
-  /* Tactical Typography */
-  --font-command: 'Bebas Neue', sans-serif;
-  --font-field-manual: 'Inter', sans-serif;
-  --font-mono-tactical: 'Space Mono', monospace;
-  
-  /* Barrier Metrics */
+  /* Military-Grade Color Matrix */
+  --battlefield: #0A0F17;       /* Base operations */
+  --forge-orange: #C55A1C;      /* Action catalyst */
+  --steel-plate: #2D3542;       /* Structural elements */
+  --commissioner-gold: #D4AF37; /* Achievement accent */
+  --night-vision: #C0C6D4;      /* Primary text */
+  --classified: #1A202C;        /* Secondary backgrounds */
+
+  /* Tactical Measurements */
   --border-stroke: 2px;
   --barracks-spacing: 1.25rem;
-  --stronghold-radius: 12px;
+  --stronghold-radius: 8px;
+
+  /* Typography Command Structure */
+  --font-command: 'Bebas Neue', sans-serif;
+  --font-field-manual: 'Inter', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --battlefield: #04080f;
-    --forge-orange: #dd6b20;
-    --victory-gold: #ffd700;
-    --sweat-silver: #a8b2d1;
+    --battlefield: #04080F;
+    --forge-orange: #DD6B20;
+    --night-vision: #A8B2D1;
   }
 }
 
-/* Base Warrior Template */
+/* Base Soldier Template */
 body {
   background: var(--battlefield);
-  color: var(--sweat-silver);
+  color: var(--night-vision);
   font-family: var(--font-field-manual);
+  font-weight: 450;
   line-height: 1.75;
-  font-weight: 500;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Leadership Hierarchy */
-h1 {
+/* Strategic Typography Hierarchy */
+h1, h2, h3 {
   font-family: var(--font-command);
-  font-size: 4rem;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: var(--gradient-rage);
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: 4.5rem;
+  line-height: 1;
+  background: linear-gradient(45deg, var(--forge-orange), var(--commissioner-gold));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 h2 {
-  font-family: var(--font-command);
   font-size: 2.5rem;
   border-left: 4px solid var(--forge-orange);
   padding-left: var(--barracks-spacing);
 }
 
-/* Crisis Message Framework */
-.crisis-message {
-  background: var(--iron-gray);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--forge-orange);
-  padding: 2rem;
-  border-radius: var(--stronghold-radius);
-  position: relative;
-  margin: 3rem 0;
-}
-
-.crisis-message::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L100 50L50 100L0 50Z' fill='%23c55a1c' opacity='0.05'/%3E%3C/svg%3E");
-  opacity: 0.15;
-}
-
-/* Mission Declaration */
-.mission-statement {
-  background: linear-gradient(to right, var(--battlefield) 0%, var(--iron-gray) 100%);
-  border-left: 4px solid var(--victory-gold);
-  padding: 2rem;
-  margin: 2rem 0;
-  position: relative;
-}
-
-.mission-statement::after {
-  content: '⚔️';
-  position: absolute;
-  right: -20px;
-  top: -20px;
-  font-size: 2rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-/* Brotherhood CTA */
-.cta-battleplan {
-  background: var(--forge-orange);
-  color: var(--battlefield);
-  font-family: var(--font-command);
-  font-size: 1.25rem;
-  padding: 1rem 3rem;
-  border-radius: var(--stronghold-radius);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.cta-battleplan::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
-  animation: cta-gleam 3s infinite linear;
-  transform: translateX(-100%) rotate(45deg);
-}
-
-@keyframes cta-gleam {
-  100% {
-    transform: translateX(100%) rotate(45deg);
-  }
-}
-
-/* Warrior Components */
-.battle-card {
-  background: var(--iron-gray);
-  border: var(--border-stroke) solid var(--forge-orange);
+/* Combat-Ready Components */
+.strategic-card {
+  background: var(--classified);
+  border: var(--border-stroke) solid var(--steel-plate);
   border-radius: var(--stronghold-radius);
   padding: 2.5rem;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.battle-card:hover {
-  transform: translateY(-5px) rotateX(5deg);
+.strategic-card:hover {
+  transform: translateY(-5px) rotateX(3deg);
   box-shadow: 0 8px 32px rgba(197, 90, 28, 0.15);
 }
 
-/* AI Mentor Interface */
-.ai-mentor-container {
-  background: linear-gradient(45deg, var(--battlefield) 0%, var(--iron-gray) 100%);
-  border-radius: var(--stronghold-radius);
-  border: 1px solid var(--forge-orange);
+/* Tactical Interface Elements */
+.cta-deployment {
+  background: var(--forge-orange);
+  color: var(--battlefield);
+  font-family: var(--font-command);
+  padding: 1.25rem 3rem;
+  border: 2px solid var(--steel-plate);
   position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ai-mentor-container::after {
+.cta-deployment::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 75% 20%, rgba(197, 90, 28, 0.15) 0%, transparent 50%);
+  background: linear-gradient(45deg, 
+    transparent 25%,
+    rgba(255,255,255,0.1) 50%,
+    transparent 75%
+  );
+  animation: cta-gleam 3s infinite linear;
 }
 
-/* Progress Warfare */
-.progress-ring {
-  stroke: var(--forge-orange);
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.85s ease-out;
-  filter: drop-shadow(0 0 4px rgba(197, 90, 28, 0.4));
+@keyframes cta-gleam {
+  100% { transform: translateX(100%); }
 }
 
-/* Victory Scroll */
+/* Military Documentation Effects */
+.classified-border {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.classified-border::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--forge-orange);
+}
+
+/* Strategic Grid System */
+.tactical-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  background-image: 
+    linear-gradient(to right, var(--steel-plate) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--steel-plate) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Performance Enhancements */
+@keyframes tactical-reveal {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Secure Scroll Interface */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--battlefield);
+  background: var(--classified);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--forge-orange);
-  border-radius: 5px;
   border: 2px solid var(--battlefield);
+  border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--victory-gold);
-}
-
-/* Mobile Command */
+/* Mobile Command Center */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.75rem;
+    font-size: 3rem;
   }
-  
-  .crisis-message {
+
+  .strategic-card {
     padding: 1.5rem;
-    margin: 2rem 0;
   }
-  
-  .mission-statement {
-    padding: 1.5rem;
+
+  .cta-deployment {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
   }
 }
 
-/* Animation Arsenal */
-@keyframes medal-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
+/* Classified Utilities */
+.bg-tactical-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-@keyframes field-strike {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+.text-command {
+  font-family: var(--font-command);
+  letter-spacing: 0.1em;
+}
+
+.border-tactical {
+  border-color: var(--steel-plate);
 }
