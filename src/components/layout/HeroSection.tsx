@@ -14,12 +14,12 @@ export default function HeroSection() {
 
   return (
     <>
-      <nav className="absolute top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50">
+      <nav className="absolute top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50 bg-transparent">
         <div className="flex items-center">
           <h1 className="text-white font-bold text-2xl">YourBusiness</h1>
         </div>
         <div className="flex space-x-8">
-          {/* Navbar links */}
+          {/* Corrected Navbar links */}
           <Link href="/" className="text-white hover:text-primary">Home</Link>
           <Link href="#features" className="text-white hover:text-primary">Features</Link>
           <Link href="#docs" className="text-white hover:text-primary">Docs</Link>
