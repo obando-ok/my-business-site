@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Particles from "react-tsparticles";
@@ -12,7 +13,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#2c1a0d] to-[#5a3921]">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-animate">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -21,13 +22,13 @@ export default function HeroSection() {
           background: { color: "transparent" },
           fpsLimit: 60,
           particles: {
-            number: { value: 40 },
+            number: { value: 50 },
             size: { value: 3 },
             move: { enable: true, speed: 1.5 },
             links: { 
               enable: true, 
               distance: 150, 
-              color: "#c97d2c",
+              color: "#c97d2c", 
               opacity: 0.3 
             },
             opacity: { value: 0.5 },
@@ -47,7 +48,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl font-bold tracking-tight text-primary"
+          className="text-5xl sm:text-6xl font-bold tracking-tight text-white"
         >
           Forge Your Legacy
         </motion.h1>
@@ -56,7 +57,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-6 text-xl text-secondary max-w-lg mx-auto"
+          className="mt-6 text-xl text-gray-200 max-w-lg mx-auto"
         >
           Elevate your potential through disciplined growth and relentless self-mastery
         </motion.p>
