@@ -73,14 +73,15 @@ button:hover,
 /* Remove focus outline for buttons */
 button:focus,
 .cta-button:focus {
-  outline: none; /* Remove the focus outline */
+  outline: none !important; /* Force removal of outline */
   box-shadow: none; /* Remove shadow if focused */
+  border: none !important; /* Ensure no border remains */
 }
 
 /* Focus styles for accessibility */
 button:focus-visible,
 .cta-button:focus-visible {
-  outline: none; /* Remove outline when the user navigates via keyboard or touch */
+  outline: none !important; /* Remove outline when the user navigates via keyboard or touch */
   box-shadow: none;
 }
 
