@@ -1,28 +1,17 @@
-/* Import Tailwind and Fonts */
+/* Updated globals.css */
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Masculine Color Palette */
-  --background: #0f0f0f;        /* Rich charcoal base */
-  --foreground: #e8e0d9;        /* Warm parchment text */
-  --primary: #c97d2c;           /* Burnt orange accent */
-  --secondary: #5a3921;         /* Deep coffee brown */
-  --accent: #3c2a1d;            /* Dark leather tone */
-  --gradient-start: #2c1a0d;    /* Dark espresso */
-  --gradient-end: #5a3921;      /* Warm mahogany */
-  --button-bg: #c97d2c;
-  --button-hover-bg: #b56d24;
-  --border-color: #362417;      /* Deep bronze */
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'Manrope', sans-serif;
-  --font-mono: 'Roboto Mono', monospace;
-  --border-radius: 8px;
-  --box-shadow: 0 4px 20px rgba(201, 125, 44, 0.3);
+  --background: #f8f9fc; /* Light background color for the main page */
+  --foreground: #171717; /* Dark text color for better contrast */
+  --primary: #6366f1; /* Stripe-like blue for buttons and highlights */
+  --secondary: #ec4899; /* Soft pinkish purple for accents */
+  --gradient-start: #6366f1; /* Starting color for gradient */
+  --gradient-end: #ec4899; /* Ending color for gradient */
+  --button-bg: #6366f1; /* Button background */
+  --button-hover-bg: #4f46e5; /* Button hover color */
+  --border-color: #362417;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,7 +24,7 @@
   }
 }
 
-/* Base Styles */
+/* Global Styles */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -46,72 +35,82 @@ body {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1.6;
   font-weight: 500;
-  min-height: 100vh;
 }
 
-/* Gradient Animation */
+/* Background Gradient Animation */
 @keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .bg-gradient-animate {
-  background: linear-gradient(
-    270deg,
-    var(--gradient-start),
-    var(--accent),
-    var(--gradient-end)
-  );
+  background: linear-gradient(270deg, var(--gradient-start), var(--gradient-end));
   background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
+  animation: gradientAnimation 10s ease infinite;
 }
 
-/* Masculine Components */
-button,
-.button,
-.cta-button {
+/* Button Styles */
+button, .button, .cta-button {
   font-family: var(--font-sans);
   font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  background: var(--button-bg);
-  color: var(--foreground);
-  border: 2px solid var(--border-color);
-  padding: 1rem 2.5rem;
-  border-radius: var(--border-radius);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  outline: none;
+  border: none;
+  user-select: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover,
-.button:hover,
 .cta-button:hover {
-  background: var(--button-hover-bg);
-  transform: translateY(-2px);
-  box-shadow: var(--box-shadow);
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Text Elements */
-h1 {
-  font-size: 3.5rem;
-  line-height: 1.1;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+button:focus,
+.cta-button:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
 }
 
-h2 {
-  font-size: 2.5rem;
-  font-weight: 650;
+button:focus-visible,
+.cta-button:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
-h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
+/* Primary Button */
+.bg-primary {
+  background-color: var(--primary);
+  color: white;
+  font-weight: bold;
 }
 
+.bg-primary:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Secondary Button */
+.bg-secondary {
+  background-color: var(--secondary);
+  color: white;
+  font-weight: bold;
+}
+
+.bg-secondary:hover {
+  background-color: #db2777; /* A darker shade of pinkish red */
+}
+
+/* Global Text Colors */
 .text-primary {
   color: var(--primary);
 }
@@ -120,73 +119,17 @@ h3 {
   color: var(--secondary);
 }
 
-/* Card Styles */
-.card {
-  background: var(--accent);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  transition: transform 0.3s ease;
+/* Tailwind Customizations */
+.bg-primary {
+  background-color: var(--primary);
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.bg-secondary {
+  background-color: var(--secondary);
 }
 
-/* Particle Overrides */
-.tsparticles-canvas-el {
-  opacity: 0.15 !important;
-}
-
-/* Border Utilities */
-.border-primary {
-  border-color: var(--primary);
-}
-
-.border-secondary {
-  border-color: var(--secondary);
-}
-
-/* Navigation Effects */
-.backdrop-blur-sm {
-  backdrop-filter: blur(10px);
-}
-
-.dark .backdrop-blur-sm {
-  backdrop-filter: blur(12px);
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--button-hover-bg);
-}
-
-/* Selection Styling */
-::selection {
-  background: var(--primary);
-  color: var(--background);
-}
-
-/* Responsive Typography */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  
-  h2 {
-    font-size: 2rem;
-  }
+/* Dark Mode */
+body[data-theme="dark"] {
+  background-color: var(--background);
+  color: var(--foreground);
 }
