@@ -1,3 +1,4 @@
+// MAiN - HeroSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -25,11 +26,11 @@ export default function HeroSection() {
             number: { value: 50 },
             size: { value: 3 },
             move: { enable: true, speed: 1.5 },
-            links: { 
-              enable: true, 
-              distance: 150, 
-              color: "#c97d2c", 
-              opacity: 0.3 
+            links: {
+              enable: true,
+              distance: 150,
+              color: "#c97d2c",
+              opacity: 0.3,
             },
             opacity: { value: 0.5 },
             color: { value: "#c97d2c" },
@@ -50,36 +51,36 @@ export default function HeroSection() {
           transition={{ duration: 1 }}
           className="text-5xl sm:text-6xl font-bold tracking-tight text-white"
         >
-          Forge Your Legacy
+          Forge Your Legacy with MAiN
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="mt-6 text-xl text-gray-200 max-w-lg mx-auto"
+          className="mt-6 text-lg sm:text-xl text-gray-200 max-w-xl mx-auto"
         >
-          Elevate your potential through disciplined growth and relentless self-mastery
+          Reclaim purpose. Reinforce values. Reshape your life — guided by AI and built by discipline.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.6 }}
-          className="mt-12 flex justify-center gap-6"
+          className="mt-12 flex flex-wrap justify-center gap-6"
         >
           <Link
-            href="#get-started"
+            href="#evaluation"
             className="px-10 py-5 bg-primary text-white rounded-lg font-bold shadow-lg hover:bg-button-hover-bg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border-2 border-secondary"
           >
-            Begin Journey
+            Begin Evaluation
           </Link>
 
           <Link
-            href="#philosophy"
+            href="#mission"
             className="px-10 py-5 bg-transparent text-primary rounded-lg font-bold border-2 border-primary hover:bg-primary/10 hover:border-secondary transition-all duration-300 ease-in-out"
           >
-            Our Philosophy
+            Our Mission
           </Link>
         </motion.div>
       </div>
