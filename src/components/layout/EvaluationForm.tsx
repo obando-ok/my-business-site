@@ -1,4 +1,3 @@
-// MAiN - EvaluationForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -85,7 +84,7 @@ const EvaluationForm = () => {
 
           <div>
             <label className="block mb-4 text-sm font-medium">
-              Select areas you'd like to improve:
+              Select areas you&rsquo;d like to improve:
             </label>
             <div className="grid grid-cols-2 gap-4">
               {traits.map((trait) => (
