@@ -1,7 +1,8 @@
-/* Import Tailwind and Fonts */
-@import "tailwindcss";
+/* Import Fonts and Tailwind First */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
+/* Custom Properties */
 :root {
   /* Masculine Color Palette */
   --background: #0f0f0f;        /* Rich charcoal base */
@@ -35,7 +36,6 @@
   }
 }
 
-/* Base Styles */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -49,7 +49,6 @@ body {
   min-height: 100vh;
 }
 
-/* Gradient Animation */
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -67,7 +66,6 @@ body {
   animation: gradientAnimation 15s ease infinite;
 }
 
-/* Masculine Components */
 button,
 .button,
 .cta-button {
@@ -94,7 +92,6 @@ button:hover,
   box-shadow: var(--box-shadow);
 }
 
-/* Text Elements */
 h1 {
   font-size: 3.5rem;
   line-height: 1.1;
@@ -120,7 +117,6 @@ h3 {
   color: var(--secondary);
 }
 
-/* Card Styles */
 .card {
   background: var(--accent);
   border: 1px solid var(--border-color);
@@ -133,12 +129,10 @@ h3 {
   transform: translateY(-5px);
 }
 
-/* Particle Overrides */
 .tsparticles-canvas-el {
   opacity: 0.15 !important;
 }
 
-/* Border Utilities */
 .border-primary {
   border-color: var(--primary);
 }
@@ -147,7 +141,6 @@ h3 {
   border-color: var(--secondary);
 }
 
-/* Navigation Effects */
 .backdrop-blur-sm {
   backdrop-filter: blur(10px);
 }
@@ -156,7 +149,6 @@ h3 {
   backdrop-filter: blur(12px);
 }
 
-/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -174,18 +166,16 @@ h3 {
   background: var(--button-hover-bg);
 }
 
-/* Selection Styling */
 ::selection {
   background: var(--primary);
   color: var(--background);
 }
 
-/* Responsive Typography */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
   }
-  
+
   h2 {
     font-size: 2rem;
   }

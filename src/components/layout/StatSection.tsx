@@ -1,23 +1,22 @@
-// src/components/layout/StatSection.tsx
 "use client";
 
+import SectionWrapper from "@/components/ui/SectionWrapper";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
 
 const stats = [
   { label: "Active Users", value: 3200, suffix: "+" },
   { label: "Uptime Guarantee", value: 99.997, suffix: "%" },
-  { label: "Transactions Processed", value: 500, suffix: "M+" },
+  { label: "Workouts Completed", value: 85000, suffix: "+" },
 ];
 
 export default function StatSection() {
   return (
-    <section className="bg-background py-20 px-6 border-t border-border">
+    <SectionWrapper id="stats" className="bg-background">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-12">
           Proven at Scale
         </h2>
-
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
           {stats.map((stat, index) => (
             <motion.div
@@ -38,6 +37,6 @@ export default function StatSection() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

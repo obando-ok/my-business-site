@@ -1,15 +1,24 @@
 "use client";
+
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <footer className="border-t border-border bg-background py-10 px-6 mt-24">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-sm text-muted-foreground">© {new Date().getFullYear()} YourBusiness. All rights reserved.</div>
+        <div className="text-sm text-muted-foreground">
+          © {new Date().getFullYear()} YourBusiness. All rights reserved.
+        </div>
         <nav className="flex items-center gap-6 text-sm">
           <Link href="#features" className="hover:text-primary transition-colors">
             Features
@@ -17,13 +26,19 @@ export default function Footer() {
           <Link href="#contact" className="hover:text-primary transition-colors">
             Contact
           </Link>
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            aria-label="Toggle Theme"
-            className="hover:text-primary transition-colors"
-          >
-            {theme === "dark" ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
-          </button>
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              aria-label="Toggle Theme"
+              className="hover:text-primary transition-colors"
+            >
+              {theme === "dark" ? (
+                <SunIcon className="w-4 h-4" />
+              ) : (
+                <MoonIcon className="w-4 h-4" />
+              )}
+            </button>
+          )}
         </nav>
       </div>
     </footer>

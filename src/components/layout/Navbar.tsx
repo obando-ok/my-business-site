@@ -1,96 +1,105 @@
 "use client";
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
-const navItems = [
-  { label: "Products", href: "#products", hasDropdown: true },
-  { label: "Solutions", href: "#solutions", hasDropdown: true },
-  { label: "Developers", href: "#developers", hasDropdown: true },
-  { label: "Resources", href: "#resources", hasDropdown: true },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact sales", href: "#contact", hasDropdown: true },
-];
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/components/providers/SupabaseProvider";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+  const { session } = useAuth();
   const [mounted, setMounted] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 w-full backdrop-blur-sm transition-all duration-300 ${
-      scrolled ? "bg-white/80 dark:bg-black/80 shadow-sm" : "bg-transparent"
-    }`}>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Left Section */}
-        <div className="flex items-center gap-8">
-          <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-            YourBusiness
-          </Link>
-          
-          <div className="hidden lg:flex items-center gap-6">
-            {navItems.map((item) => (
-              <div key={item.label} className="relative group">
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-1.5 text-[15px] font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors duration-200"
-                >
-                  {item.label}
-                  {item.hasDropdown && (
-                    <svg
-                      className="w-4 h-4 mt-0.5 text-current"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  )}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+    <header className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+        <Link href="/" className="font-semibold">
+          MAiN
+        </Link>
 
-        {/* Right Section */}
-        <div className="flex items-center gap-6">
+        <nav className="hidden gap-4 sm:flex">
           <Link
-            href="#signin"
-            className="text-[15px] font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors duration-200"
+            href="#about"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
-            Sign in
+            About
           </Link>
+          <Link
+            href="#features"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Features
+          </Link>
+          <Link
+            href="/journal"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Journal
+          </Link>
+          <Link
+            href="/evaluation"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Evaluation
+          </Link>
+        </nav>
 
-          {mounted && (
-            <button
-              aria-label="Toggle Theme"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-300"
-            >
-              {theme === "dark" ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )}
-            </button>
+        <div className="hidden sm:flex items-center gap-2">
+          {session ? (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/profile">Mission Control</Link>
+              </Button>
+            </>
+          ) : (
+            <Button asChild size="sm">
+              <Link href="/auth">Begin</Link>
+            </Button>
           )}
         </div>
-      </nav>
+
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="sm:hidden">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right">
+            <div className="grid gap-4 py-6">
+              <Link href="#about" className="text-sm font-medium">
+                About
+              </Link>
+              <Link href="#features" className="text-sm font-medium">
+                Features
+              </Link>
+              <Link href="/journal" className="text-sm font-medium">
+                Journal
+              </Link>
+              <Link href="/evaluation" className="text-sm font-medium">
+                Evaluation
+              </Link>
+              {session ? (
+                <>
+                  <Link href="/profile" className="text-sm font-medium">
+                    Mission Control
+                  </Link>
+                </>
+              ) : (
+                <Link href="/auth" className="text-sm font-medium">
+                  Begin
+                </Link>
+              )}
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
     </header>
   );
 }

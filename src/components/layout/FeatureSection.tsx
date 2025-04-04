@@ -1,56 +1,59 @@
-// src/components/layout/FeatureSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircleIcon, BoltIcon, ChartBarIcon } from "@heroicons/react/24/outline";
+import { LucideLeaf, LucideTarget, LucideLineChart } from "lucide-react";
 
 const features = [
   {
-    title: "Blazing Fast Setup",
-    description: "Deploy your entire platform in minutes with our streamlined onboarding.",
-    icon: <BoltIcon className="h-6 w-6 text-primary" />,
+    icon: <LucideLeaf className="w-6 h-6 text-green-400" />,
+    title: "Mindful Check-ins",
+    description: "Start and end your day with clarity using our simple daily reflections.",
   },
   {
-    title: "Built for Scale",
-    description: "Engineered to grow with your business — from MVP to global deployment.",
-    icon: <ChartBarIcon className="h-6 w-6 text-primary" />,
+    icon: <LucideLineChart className="w-6 h-6 text-sky-400" />,
+    title: "Track Growth, Not Just Goals",
+    description: "Watch your mindset evolve over time through guided evaluations and streak insights.",
   },
   {
-    title: "Secure by Design",
-    description: "Bank-grade encryption, access control, and built-in compliance.",
-    icon: <CheckCircleIcon className="h-6 w-6 text-primary" />,
+    icon: <LucideTarget className="w-6 h-6 text-purple-400" />,
+    title: "Personalized Mission Control",
+    description: "Stay aligned with your values and vision by reconnecting with your mission each week.",
   },
 ];
 
 export default function FeatureSection() {
   return (
-    <section id="features" className="bg-background py-24 px-6">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="py-24 sm:py-32 px-6 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="max-w-3xl mx-auto mb-12"
+      >
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-          Everything You Need. Nothing You Don’t.
+          Core Benefits for Your Self-Mastery Journey
         </h2>
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Focus on your business, not your infrastructure. We’ve got it covered.
+        <p className="text-muted-foreground mt-2 text-base sm:text-lg">
+          Designed to help you build awareness, clarity, and long-term momentum.
         </p>
+      </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="p-6 rounded-xl border border-border bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-4 mx-auto">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
+      <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
+        {features.map((f, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * i }}
+            viewport={{ once: true }}
+            className="bg-muted/10 p-6 rounded-xl border border-border shadow-sm"
+          >
+            <div className="mb-4 flex justify-center">{f.icon}</div>
+            <h3 className="text-lg font-semibold text-foreground">{f.title}</h3>
+            <p className="text-sm text-muted-foreground mt-2">{f.description}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
