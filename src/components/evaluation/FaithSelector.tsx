@@ -1,14 +1,15 @@
-// components/evaluation/FaithSelector.tsx
+
 "use client";
 
 import { motion } from "framer-motion";
+import { CheckCircle } from "lucide-react";
 
-const FAITHS = [
-  "Islam",
-  "Christianity",
-  "Judaism",
-  "Spiritual",
-  "Prefer not to say",
+const FAITH_OPTIONS = [
+  { label: "Islam", description: "Daily structure, prayer, purpose." },
+  { label: "Christianity", description: "Grace, discipline, and faith." },
+  { label: "Judaism", description: "Tradition, identity, spiritual rhythm." },
+  { label: "Spiritual", description: "Open path, introspection, mindfulness." },
+  { label: "Prefer not to say", description: "Keep your beliefs personal." },
 ];
 
 interface FaithSelectorProps {
@@ -18,46 +19,66 @@ interface FaithSelectorProps {
 
 export default function FaithSelector({ value, onSelect }: FaithSelectorProps) {
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">
-        Do you follow a particular faith or belief system?
-      </h2>
+    <section className="space-y-8">
+      {/* Heading */}
+      <div className="text-center space-y-2">
+        <h2 className="text-2xl font-bold tracking-tight">
+          Choose Your Faith or Belief System
+        </h2>
+        <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+          This is optional, but helps us tailor spiritual alignment with your daily journey.
+        </p>
+      </div>
 
-      <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Faith options">
-        {FAITHS.map((option) => {
-          const isSelected = value === option;
+      {/* Grid of options */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+        role="radiogroup"
+        aria-label="Faith options"
+      >
+        {FAITH_OPTIONS.map(({ label, description }) => {
+          const selected = value === label;
 
           return (
-            <motion.label
-              key={option}
-              whileTap={{ scale: 0.97 }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.25 }}
-              className={`block p-4 rounded-md border cursor-pointer text-sm font-medium transition-all focus-within:ring-2 focus-within:ring-primary outline-none ${
-                isSelected
-                  ? "bg-primary text-primary-foreground border-primary shadow-md"
-                  : "bg-background text-foreground border-border hover:bg-accent"
-              }`}
+            <motion.button
+              key={label}
+              type="button"
+              onClick={() => onSelect(label)}
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 240, damping: 20 }}
+              className={`
+                relative w-full text-left rounded-xl border px-5 py-4 shadow-sm
+                transition-all duration-200 select-none group
+                ${
+                  selected
+                    ? "bg-primary text-primary-foreground border-primary shadow-lg"
+                    : "bg-muted text-foreground border-border hover:border-primary/60 hover:shadow-md"
+                }
+              `}
+              role="radio"
+              aria-checked={selected}
+              aria-label={label}
             >
-              <input
-                type="radio"
-                name="faith"
-                value={option}
-                checked={isSelected}
-                onChange={() => onSelect(option)}
-                className="sr-only"
-                aria-checked={isSelected}
-                aria-label={option}
-              />
-              {option}
-            </motion.label>
+              {/* Icon if selected */}
+              {selected && (
+                <CheckCircle className="absolute top-3 right-3 h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+              )}
+
+              <div className="flex flex-col gap-1">
+                <span className="text-base font-semibold">{label}</span>
+                <span className="text-sm text-muted-foreground leading-snug">
+                  {description}
+                </span>
+              </div>
+            </motion.button>
           );
         })}
       </div>
 
-      <p className="text-xs text-muted-foreground mt-2">
-        This helps personalize your content — your choice is confidential.
+      <p className="text-xs text-muted-foreground text-center">
+        Your selection stays private. It only influences your internal plan.
       </p>
-    </div>
+    </section>
   );
 }

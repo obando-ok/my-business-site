@@ -7,6 +7,7 @@ import { useAuth } from "@/components/providers/SupabaseProvider";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import UserDropdown from "@/components/layout/UserDropdown";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -55,8 +56,9 @@ export default function Navbar() {
           {session ? (
             <>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/profile">Mission Control</Link>
+                <Link href="/profile/mission">Mission Control</Link>
               </Button>
+              <UserDropdown />
             </>
           ) : (
             <Button asChild size="sm">
@@ -86,11 +88,9 @@ export default function Navbar() {
                 Evaluation
               </Link>
               {session ? (
-                <>
-                  <Link href="/profile" className="text-sm font-medium">
-                    Mission Control
-                  </Link>
-                </>
+                <Link href="/profile/mission" className="text-sm font-medium">
+                  Mission Control
+                </Link>
               ) : (
                 <Link href="/auth" className="text-sm font-medium">
                   Begin

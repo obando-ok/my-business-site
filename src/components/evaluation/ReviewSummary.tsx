@@ -1,7 +1,7 @@
-// components/evaluation/ReviewSummary.tsx
 "use client";
 
-import { motion } from "framer-motion";
+import { FC } from "react";
+import { CheckCircle, ListOrdered, BadgeCheck, BookOpen } from "lucide-react";
 
 interface ReviewSummaryProps {
   questions: string[];
@@ -10,56 +10,69 @@ interface ReviewSummaryProps {
   faith: string;
 }
 
-export default function ReviewSummary({ questions, answers, traits, faith }: ReviewSummaryProps) {
+const ReviewSummary: FC<ReviewSummaryProps> = ({
+  questions,
+  answers,
+  traits,
+  faith,
+}) => {
   return (
-    <motion.div
-      className="space-y-6"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <h2 className="text-xl font-semibold">Review your answers before submission</h2>
-
-      <div className="space-y-6">
-        {/* Questions & Answers */}
-        <div className="space-y-4">
-          {questions.map((q, i) => (
-            <div
-              key={i}
-              className="p-4 rounded-lg bg-muted/5 border border-border"
-            >
-              <p className="text-sm font-medium text-foreground mb-1">{q}</p>
-              <p className="text-sm text-muted-foreground">
-                {answers[i] ? answers[i] : "—"}
+    <div className="space-y-8">
+      <div>
+        <div className="flex items-center gap-2 mb-2 text-orange-500">
+          <ListOrdered className="h-5 w-5" />
+          <h3 className="text-lg font-semibold">Your Answers</h3>
+        </div>
+        <ul className="space-y-4">
+          {questions.map((q, idx) => (
+            <li key={idx}>
+              <p className="text-sm font-medium text-muted-foreground mb-1">{q}</p>
+              <p className="text-base text-foreground border-l-2 border-orange-500 pl-3">
+                {answers[idx] || "—"}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
-
-        {/* Traits */}
-        <div className="p-4 rounded-lg bg-muted/5 border border-border space-y-2">
-          <p className="text-sm font-medium text-foreground">
-            Traits to Develop:
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {traits.length > 0 ? traits.join(", ") : "None selected"}
-          </p>
-        </div>
-
-        {/* Faith */}
-        <div className="p-4 rounded-lg bg-muted/5 border border-border space-y-2">
-          <p className="text-sm font-medium text-foreground">
-            Faith Preference:
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {faith || "Not specified"}
-          </p>
-        </div>
+        </ul>
       </div>
 
-      <p className="text-xs text-muted-foreground mt-2">
-        You can go back and make any changes before submitting.
-      </p>
-    </motion.div>
+      <div>
+        <div className="flex items-center gap-2 mb-2 text-orange-500">
+          <CheckCircle className="h-5 w-5" />
+          <h3 className="text-lg font-semibold">Selected Traits</h3>
+        </div>
+        <ul className="flex flex-wrap gap-2">
+          {traits.length > 0 ? (
+            traits.map((trait, index) => (
+              <li
+                key={index}
+                className="px-3 py-1 rounded-md bg-orange-500/10 text-orange-300 text-sm font-medium border border-orange-500/30"
+              >
+                {trait}
+              </li>
+            ))
+          ) : (
+            <p className="text-muted-foreground text-sm">No traits selected.</p>
+          )}
+        </ul>
+      </div>
+
+      <div>
+        <div className="flex items-center gap-2 mb-2 text-orange-500">
+          <BookOpen className="h-5 w-5" />
+          <h3 className="text-lg font-semibold">Faith Selection</h3>
+        </div>
+        <p
+          className={`inline-block px-3 py-1 rounded-md text-sm font-medium border ${
+            faith
+              ? "bg-orange-500/10 text-orange-300 border-orange-500/30"
+              : "text-muted-foreground border-border"
+          }`}
+        >
+          {faith || "None selected"}
+        </p>
+      </div>
+    </div>
   );
-}
+};
+
+export default ReviewSummary;

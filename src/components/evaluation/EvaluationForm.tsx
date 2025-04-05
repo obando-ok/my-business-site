@@ -8,7 +8,6 @@ import TraitSelector from "./TraitSelector";
 import FaithSelector from "./FaithSelector";
 import ReviewSummary from "./ReviewSummary";
 import { Button } from "@/components/ui/button";
-import Confetti from "react-confetti";
 import { useRouter } from "next/navigation";
 
 const questions = [
@@ -38,7 +37,6 @@ export default function EvaluationForm() {
       return;
     }
     setError(null);
-
     if (step < totalSteps - 1) {
       setStep(step + 1);
     } else {
@@ -50,15 +48,6 @@ export default function EvaluationForm() {
     if (step > 0) setStep(step - 1);
     setError(null);
   };
-
-  useEffect(() => {
-    if (submitted) {
-      const timer = setTimeout(() => {
-        router.push("/profile");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [submitted, router]);
 
   const renderStep = () => {
     if (step < questions.length) {
@@ -111,31 +100,36 @@ export default function EvaluationForm() {
   };
 
   return (
-    <section className="min-h-screen px-4 py-12 flex flex-col items-center justify-center bg-background text-foreground">
-      <div className="w-full max-w-3xl space-y-8">
-        {/* Header */}
+    <section className="min-h-screen px-6 py-14 flex flex-col items-center justify-center bg-background text-foreground">
+      <div className="w-full max-w-3xl space-y-10">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="text-center"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">
-            Self-Improvement Evaluation
+          <h1 className="text-2xl font-bold uppercase tracking-widest text-primary mb-2">
+            Self Evaluation
           </h1>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto">
-            Your honest answers help tailor your growth journey. Take a moment to reflect as you go.
+          <h2 className="text-4xl font-extrabold tracking-tight text-foreground mb-1">
+            Personal Mastery Evaluation
+          </h2>
+          <p className="text-muted-foreground text-sm sm:text-base max-w-lg mx-auto">
+            This assessment defines your starting point. Be honest. Be thorough.
           </p>
         </motion.div>
 
-        {/* Form Card */}
+        <div className="text-sm text-muted-foreground text-center uppercase tracking-wider font-semibold">
+          Step {step + 1} of {totalSteps}
+        </div>
+
         <motion.div
           key={step}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.35 }}
-          className="bg-white/5 backdrop-blur-md border border-border rounded-xl p-6 shadow-lg space-y-6"
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3 }}
+          className="bg-white/5 border border-border rounded-xl p-6 shadow-md backdrop-blur-sm space-y-6"
         >
           {!submitted ? (
             <>
@@ -144,21 +138,21 @@ export default function EvaluationForm() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`step-${step}`}
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.35 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.3 }}
                 >
                   {renderStep()}
                   {error && (
-                    <p className="mt-2 text-sm text-red-500 font-medium">
+                    <p className="mt-3 text-sm text-red-500 font-medium">
                       {error}
                     </p>
                   )}
                 </motion.div>
               </AnimatePresence>
 
-              <div className="flex justify-between pt-4">
+              <div className="flex justify-between pt-6">
                 <Button
                   variant="ghost"
                   onClick={handleBack}
@@ -167,48 +161,68 @@ export default function EvaluationForm() {
                   Back
                 </Button>
                 <Button onClick={handleNext}>
-                  {step === totalSteps - 1 ? "Submit" : "Next"}
+                  {step === totalSteps - 1 ? "Finish" : "Next Step"}
                 </Button>
               </div>
             </>
           ) : (
-            <>
-              <Confetti recycle={false} numberOfPieces={180} />
+            <motion.div
+              className="text-center py-10 space-y-6"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <motion.div
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="p-6 bg-muted/10 backdrop-blur-md border border-border rounded-xl text-center space-y-4 shadow-xl"
+                className="flex flex-col items-center gap-2"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
               >
-                <motion.h2
-                  className="text-2xl font-semibold tracking-tight text-primary"
-                  initial={{ scale: 0.85, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  Evaluation Complete <span role="img" aria-label="target">🎯</span>
-                </motion.h2>
-
-                <motion.p
-                  className="text-sm text-muted-foreground max-w-md mx-auto"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  Your responses have been recorded. You’ll be redirected to your profile shortly.
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.45 }}
-                >
-                  <Button className="mt-3" onClick={() => router.push("/profile")}>
-                    Go to Profile →
-                  </Button>
-                </motion.div>
+                <div className="text-4xl">🎯</div>
+                <h2 className="text-2xl font-bold text-primary tracking-tight">
+                  Mission Logged
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+                  Welcome to the Brotherhood. Your evaluation has been recorded. You now have a mission—and the traits to complete it.
+                </p>
               </motion.div>
-            </>
+
+              <div className="grid gap-4 max-w-md mx-auto text-left text-sm text-muted-foreground">
+                {selectedTraits.length > 0 && (
+                  <div>
+                    <p className="text-foreground font-semibold mb-1">Selected Traits</p>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedTraits.map((trait, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 rounded-full bg-orange-500/10 text-orange-300 text-xs font-medium border border-orange-500/30"
+                        >
+                          {trait}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {faith && (
+                  <div>
+                    <p className="text-foreground font-semibold mb-1">Faith Integrated</p>
+                    <span className="inline-block px-3 py-1 rounded-full bg-orange-500/10 text-orange-300 text-xs font-medium border border-orange-500/30">
+                      {faith}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <Button size="lg" className="mt-4" onClick={() => router.push("/profile/mission")}>
+                  View My Dashboard →
+                </Button>
+              </motion.div>
+            </motion.div>
           )}
         </motion.div>
       </div>

@@ -1,17 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ Correct for App Router
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function AuthForm() {
+const searchParams = useSearchParams();
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const router = useRouter();
 
   const handleAuth = async () => {
     setMessage("");
@@ -30,27 +33,59 @@ export default function AuthForm() {
 
     if (error) return setMessage(error.message);
 
-    if (isLogin) {
-      setMessage("Logged in!");
-      router.push("/profile"); // ✅ Redirect after login
-    } else {
-      setMessage("Check your inbox to confirm.");
-    }
+if (isLogin) {
+  const { data } = await supabase.auth.getSession(); // <-- force refresh
+  if (data.session) {
+    setMessage("Logged in!");
+    const redirectTo = searchParams.get("redirect") || "/profile/mission";
+    router.push(redirectTo);
+  } else {
+    setMessage("Login succeeded but session not found. Please refresh.");
+  }
+}
+
+  };
+
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({ provider: "google" });
+    if (error) setMessage(error.message);
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto space-y-6">
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          {isLogin ? "Login to your account" : "Create an account"}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full max-w-md mx-auto bg-muted/10 backdrop-blur-md border border-border shadow-xl rounded-2xl p-8 space-y-6"
+    >
+      <div className="text-center space-y-1">
+        <h2 className="text-3xl font-bold tracking-tight text-primary">
+          {isLogin ? "Welcome Back" : "Create an Account"}
         </h2>
-        <p className="text-sm text-muted-foreground mt-2">
+        <p className="text-sm text-muted-foreground">
           {isLogin
-            ? "Welcome back. Enter your credentials to continue."
-            : "Start your journey with a secure account."}
+            ? "Log in to continue your self-mastery journey."
+            : "Start unlocking clarity, discipline, and purpose."}
         </p>
       </div>
-      <div className="space-y-4">
+
+      <div>
+        <Button
+          onClick={handleGoogleLogin}
+          className="w-full bg-white text-black border border-border hover:bg-gray-100 transition"
+        >
+          Continue with Google
+        </Button>
+        <div className="text-xs text-muted-foreground text-center mt-2">or use email</div>
+      </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAuth();
+        }}
+        className="space-y-4"
+      >
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-medium text-foreground">
             Email
@@ -63,9 +98,10 @@ export default function AuthForm() {
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
             required
-            className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground text-sm shadow-sm transition-all focus:ring focus:ring-primary/40"
+            className="w-full px-4 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring focus:ring-primary/40 transition"
           />
         </div>
+
         <div className="space-y-2">
           <label htmlFor="password" className="block text-sm font-medium text-foreground">
             Password
@@ -78,28 +114,45 @@ export default function AuthForm() {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete={isLogin ? "current-password" : "new-password"}
             required
-            className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground text-sm shadow-sm transition-all focus:ring focus:ring-primary/40"
+            className="w-full px-4 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring focus:ring-primary/40 transition"
           />
         </div>
-        <Button onClick={handleAuth} className="w-full text-base font-semibold" disabled={loading}>
-          {loading ? (isLogin ? "Logging in..." : "Signing up...") : isLogin ? "Login" : "Sign Up"}
+
+        <Button
+          type="submit"
+          className="w-full text-base font-semibold"
+          disabled={loading}
+        >
+          {loading
+            ? isLogin
+              ? "Logging in..."
+              : "Signing up..."
+            : isLogin
+            ? "Login"
+            : "Sign Up"}
         </Button>
+
         {message && (
           <p className="text-sm text-center text-muted-foreground mt-2">
             {message}
           </p>
         )}
-        <p className="text-center text-xs text-muted-foreground mt-4">
-          {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button
-            type="button"
-            className="underline text-primary"
-            onClick={() => setIsLogin(!isLogin)}
-          >
-            {isLogin ? "Sign Up" : "Log In"}
-          </button>
-        </p>
+      </form>
+
+      <div className="text-center text-sm text-muted-foreground">
+        {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+        <button
+          type="button"
+          onClick={() => setIsLogin(!isLogin)}
+          className="text-primary font-semibold underline hover:opacity-90 transition"
+        >
+          {isLogin ? "Sign Up" : "Log In"}
+        </button>
       </div>
-    </div>
+
+      <div className="text-center text-xs text-muted-foreground mt-4 italic">
+        “Every day is a new chance to begin again.”
+      </div>
+    </motion.div>
   );
 }
