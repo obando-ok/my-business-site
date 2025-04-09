@@ -1,23 +1,25 @@
+// app/page.tsx – Enhanced Landing Page with Refined UX, Animation, and Professional Structure
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@supabase/auth-helpers-react";
 
-import HabitsCard from "@/components/layout/HabitsCard";
-import GoalsCard from "@/components/layout/GoalsCard";
-import FocusCard from "@/components/layout/FocusCard";
-import MotionWrapper from "@/components/motion/MotionWrapper";
 import HeroSection from "@/components/layout/HeroSection";
 import FeatureSection from "@/components/layout/FeatureSection";
 import TestimonialSection from "@/components/layout/TestimonialSection";
 import StatSection from "@/components/layout/StatSection";
 import ContactSection from "@/components/layout/ContactSection";
 import { MissionSection } from "@/components/layout/CustomSections";
-import CallToActionButton from "@/components/ui/CallToActionButton";
 import DailyQuote from "@/components/layout/DailyQuote";
+import AskMainPrompt from "@/components/ui/AskMainPrompt";
+import CallToActionButton from "@/components/ui/CallToActionButton";
 import SparkAnimation from "@/components/ui/SparkAnimation";
-import AskMainPrompt from "@/components/ui/AskMainPrompt"; // ✅ NEW
+import MotionWrapper from "@/components/motion/MotionWrapper";
+import HabitsCard from "@/components/layout/HabitsCard";
+import GoalsCard from "@/components/layout/GoalsCard";
+import FocusCard from "@/components/layout/FocusCard";
+
 import { motion } from "framer-motion";
 
 export default function LandingPage() {
@@ -32,13 +34,13 @@ export default function LandingPage() {
   };
 
   return (
-    <>
+    <main className="bg-background text-foreground">
       {/* Hero Section */}
       <MotionWrapper>
         <HeroSection />
       </MotionWrapper>
 
-      {/* CTA Section */}
+      {/* Call To Action */}
       <MotionWrapper delay={0.15}>
         <section className="relative isolate overflow-hidden py-24 sm:py-32">
           <motion.div
@@ -56,9 +58,9 @@ export default function LandingPage() {
             <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20" />
           </motion.div>
 
-          <div className="mx-auto max-w-3xl px-6 text-center space-y-6">
+          <div className="relative mx-auto max-w-3xl px-6 text-center space-y-6">
             <SparkAnimation />
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
               Ready to Elevate Your Self-Mastery?
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
@@ -69,45 +71,58 @@ export default function LandingPage() {
         </section>
       </MotionWrapper>
 
-      {/* Daily Quote */}
+      {/* Daily Quote Section */}
       <MotionWrapper delay={0.2}>
         <DailyQuote />
       </MotionWrapper>
 
-      {/* Ask MAiN Section (replaces old input prompt) */}
+      {/* Ask MAiN Motivation Prompt */}
       <MotionWrapper delay={0.25}>
-        <section className="py-16 sm:py-24 px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+        <section className="py-20 px-6 text-center bg-accent/5 border-t border-border">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-foreground">
             Need a Spark of Motivation?
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-base sm:text-lg mb-6">
             Ask MAiN for a powerful mindset boost tailored to your journey.
           </p>
-          <div className="mt-4 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <AskMainPrompt />
           </div>
         </section>
       </MotionWrapper>
 
-      {/* Conditional Cards Section - Only for Logged In Users */}
+      {/* Personalized Dashboard for Logged In Users */}
       {session?.user && (
         <>
-          <MotionWrapper delay={0.3}><MissionSection /></MotionWrapper>
+          <MotionWrapper delay={0.3}>
+            <MissionSection />
+          </MotionWrapper>
           <MotionWrapper delay={0.4}>
-            <div className="grid gap-6 lg:grid-cols-3 mt-8 px-6">
+            <section className="grid gap-6 lg:grid-cols-3 mt-8 px-6">
               <HabitsCard />
               <GoalsCard />
               <FocusCard />
-            </div>
+            </section>
           </MotionWrapper>
         </>
       )}
 
-      {/* Always visible sections */}
-      <MotionWrapper delay={0.5}><FeatureSection /></MotionWrapper>
-      <MotionWrapper delay={0.6}><StatSection /></MotionWrapper>
-      <MotionWrapper delay={0.7}><TestimonialSection /></MotionWrapper>
-      <MotionWrapper delay={0.8}><ContactSection /></MotionWrapper>
-    </>
+      {/* Platform Value Sections */}
+      <MotionWrapper delay={0.5}>
+        <FeatureSection />
+      </MotionWrapper>
+
+      <MotionWrapper delay={0.6}>
+        <StatSection />
+      </MotionWrapper>
+
+      <MotionWrapper delay={0.7}>
+        <TestimonialSection />
+      </MotionWrapper>
+
+      <MotionWrapper delay={0.8}>
+        <ContactSection />
+      </MotionWrapper>
+    </main>
   );
 }

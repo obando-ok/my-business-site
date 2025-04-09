@@ -1,8 +1,8 @@
-
 "use client";
 
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const FAITH_OPTIONS = [
   { label: "Islam", description: "Daily structure, prayer, purpose." },
@@ -18,8 +18,21 @@ interface FaithSelectorProps {
 }
 
 export default function FaithSelector({ value, onSelect }: FaithSelectorProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  const handleKey = (e: React.KeyboardEvent<HTMLButtonElement>, faith: string) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onSelect(faith);
+    }
+  };
+
   return (
-    <section className="space-y-8">
+    <section className="space-y-8" ref={containerRef}>
       {/* Heading */}
       <div className="text-center space-y-2">
         <h2 className="text-2xl font-bold tracking-tight">
@@ -44,12 +57,13 @@ export default function FaithSelector({ value, onSelect }: FaithSelectorProps) {
               key={label}
               type="button"
               onClick={() => onSelect(label)}
+              onKeyDown={(e) => handleKey(e, label)}
               whileTap={{ scale: 0.96 }}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 240, damping: 20 }}
               className={`
                 relative w-full text-left rounded-xl border px-5 py-4 shadow-sm
-                transition-all duration-200 select-none group
+                transition-all duration-200 select-none group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
                 ${
                   selected
                     ? "bg-primary text-primary-foreground border-primary shadow-lg"
@@ -59,6 +73,7 @@ export default function FaithSelector({ value, onSelect }: FaithSelectorProps) {
               role="radio"
               aria-checked={selected}
               aria-label={label}
+              tabIndex={0}
             >
               {/* Icon if selected */}
               {selected && (

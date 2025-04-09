@@ -21,6 +21,17 @@ export default function QuestionStep({ question, answer, onChange, index }: Ques
 
   const remaining = maxChars - answer.length;
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      const form = e.currentTarget.form;
+      const nextButton = form?.querySelector("button[type='submit']") as HTMLButtonElement;
+      if (nextButton && !nextButton.disabled) {
+        nextButton.click();
+      }
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -38,6 +49,7 @@ export default function QuestionStep({ question, answer, onChange, index }: Ques
         maxLength={maxChars}
         value={answer}
         onChange={(e) => onChange(e.target.value)}
+        onKeyDown={handleKeyDown}
         aria-label={`Answer to: ${question}`}
         aria-describedby={`desc-${index}`}
         placeholder="Write your thoughts here..."

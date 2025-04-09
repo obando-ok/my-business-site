@@ -18,6 +18,13 @@ interface TraitSelectorProps {
 }
 
 export default function TraitSelector({ selected, onToggle }: TraitSelectorProps) {
+  const handleKeyToggle = (e: React.KeyboardEvent<HTMLButtonElement>, trait: string) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onToggle(trait);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -38,6 +45,7 @@ export default function TraitSelector({ selected, onToggle }: TraitSelectorProps
               key={trait}
               type="button"
               onClick={() => onToggle(trait)}
+              onKeyDown={(e) => handleKeyToggle(e, trait)}
               whileTap={{ scale: 0.97 }}
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300, damping: 18 }}
@@ -49,6 +57,7 @@ export default function TraitSelector({ selected, onToggle }: TraitSelectorProps
                 }`}
               aria-pressed={isActive}
               aria-label={`Toggle trait: ${trait}`}
+              tabIndex={0}
             >
               {trait}
               {isActive && (

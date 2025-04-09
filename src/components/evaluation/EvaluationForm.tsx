@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import StepProgress from "./StepProgress";
 import QuestionStep from "./QuestionStep";
@@ -28,12 +28,25 @@ export default function EvaluationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const progress = Math.floor((step / (totalSteps - 1)) * 100);
+
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [step]);
 
   const handleNext = () => {
     if (step < questions.length && !answers[step].trim()) {
       setError("Please provide an answer before proceeding.");
+      return;
+    }
+    if (step === questions.length && selectedTraits.length === 0) {
+      setError("Please select at least one trait.");
+      return;
+    }
+    if (step === questions.length + 1 && !faith.trim()) {
+      setError("Please select a faith option or choose to skip.");
       return;
     }
     setError(null);
@@ -81,12 +94,7 @@ export default function EvaluationForm() {
     }
 
     if (step === questions.length + 1) {
-      return (
-        <FaithSelector
-          value={faith}
-          onSelect={setFaith}
-        />
-      );
+      return <FaithSelector value={faith} onSelect={setFaith} />;
     }
 
     return (
@@ -100,7 +108,10 @@ export default function EvaluationForm() {
   };
 
   return (
-    <section className="min-h-screen px-6 py-14 flex flex-col items-center justify-center bg-background text-foreground">
+    <section
+      ref={containerRef}
+      className="min-h-screen px-6 py-14 flex flex-col items-center justify-center bg-background text-foreground"
+    >
       <div className="w-full max-w-3xl space-y-10">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -120,7 +131,7 @@ export default function EvaluationForm() {
         </motion.div>
 
         <div className="text-sm text-muted-foreground text-center uppercase tracking-wider font-semibold">
-          Step {step + 1} of {totalSteps}
+          Step {step + 1} of {totalSteps} — {progress}% Complete
         </div>
 
         <motion.div
@@ -153,14 +164,13 @@ export default function EvaluationForm() {
               </AnimatePresence>
 
               <div className="flex justify-between pt-6">
-                <Button
-                  variant="ghost"
-                  onClick={handleBack}
-                  disabled={step === 0}
-                >
+                <Button variant="ghost" onClick={handleBack} disabled={step === 0}>
                   Back
                 </Button>
-                <Button onClick={handleNext}>
+                <Button
+                  onClick={handleNext}
+                  disabled={step < questions.length && !answers[step].trim()}
+                >
                   {step === totalSteps - 1 ? "Finish" : "Next Step"}
                 </Button>
               </div>
