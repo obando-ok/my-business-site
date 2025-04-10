@@ -12,8 +12,35 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" });
 
 export const metadata = {
-  title: "Your Site Title",
-  description: "Your site description",
+  title: "MAiN | The Forge of Modern Masculinity",
+  description: "Build unbreakable discipline, develop mental fortitude, and forge your strongest legacy with our data-driven self-mastery system for men.",
+  keywords: [
+    "self-mastery", 
+    "discipline", 
+    "masculine development", 
+    "mental fortitude", 
+    "habit building", 
+    "personal growth", 
+    "men's development", 
+    "productivity system"
+  ],
+  authors: [{ name: "MAiN Development Team" }],
+  creator: "MAiN",
+  publisher: "MAiN Systems",
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://main-system.com',
+    title: 'MAiN | The Forge of Modern Masculinity',
+    description: 'Build unbreakable discipline, develop mental fortitude, and forge your strongest legacy',
+    siteName: 'MAiN System',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MAiN | The Forge of Modern Masculinity',
+    description: 'Build unbreakable discipline, develop mental fortitude, and forge your strongest legacy',
+    creator: '@main_system',
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -31,7 +58,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <SupabaseProvider>
             <UserContextProvider user={user}>
               <Navbar />
-              {children}
+              <main className="pt-20 min-h-screen">
+                {children}
+              </main>
               <Footer />
             </UserContextProvider>
           </SupabaseProvider>

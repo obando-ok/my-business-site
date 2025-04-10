@@ -78,14 +78,14 @@ export default function MissionPage() {
             Daily Priorities
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <DashboardCard className="hover:shadow-lg transition-shadow duration-200">
+            <DashboardCard index={0} className="hover:shadow-lg transition-shadow duration-200">
               <HabitsCard />
             </DashboardCard>
-            <DashboardCard className="hover:shadow-lg transition-shadow duration-200">
+            <DashboardCard index={1} className="hover:shadow-lg transition-shadow duration-200">
               <GoalsCard />
             </DashboardCard>
             <div className="md:col-span-2">
-              <DashboardCard className="hover:shadow-lg transition-shadow duration-200">
+              <DashboardCard index={2} className="hover:shadow-lg transition-shadow duration-200">
                 <FocusCard />
               </DashboardCard>
             </div>
@@ -98,7 +98,7 @@ export default function MissionPage() {
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Weekly Streak
             </h2>
-            <StreakTracker />
+            <StreakTracker instanceId="dashboard-page" />
           </div>
 
           <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">

@@ -1,66 +1,41 @@
 "use client";
 
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/theme/design-system";
+import { Button } from "./button";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
-
-  const isDark = theme === "dark";
+  if (!mounted) {
+    return <div className="h-9 w-9"></div>;
+  }
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      className="group transition-all"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className={cn(
+        "relative h-9 w-9 rounded-md",
+        "bg-neutral-100 dark:bg-neutral-800",
+        "hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:text-amber-700 dark:hover:text-amber-400",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2",
+        "border border-neutral-200 dark:border-neutral-700",
+        "transition-all duration-300"
+      )}
       aria-label="Toggle theme"
     >
-      <span
-        className="inline-block transition-transform duration-300 ease-in-out group-hover:rotate-180 text-foreground"
-      >
-        {isDark ? (
-          // Sun Icon (Light Mode)
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36 6.36l-1.42-1.42M6.05 6.05l-1.42-1.42m12.02 0l1.42 1.42M6.05 17.95l1.42-1.42M12 8a4 4 0 100 8 4 4 0 000-8z"
-            />
-          </svg>
-        ) : (
-          // Moon Icon (Dark Mode)
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
-            />
-          </svg>
-        )}
-      </span>
+      <Sun className="h-5 w-5 rotate-0 scale-100 text-amber-600 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-5 w-5 rotate-90 scale-0 text-amber-400 transition-all dark:rotate-0 dark:scale-100" />
+      <span className="sr-only">Toggle theme</span>
     </Button>
   );
 }

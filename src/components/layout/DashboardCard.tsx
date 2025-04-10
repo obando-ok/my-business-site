@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-type DashboardCardProps = {
+interface DashboardCardProps {
   children: ReactNode;
   index: number;
-};
+  className?: string;
+}
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -21,16 +22,18 @@ const cardVariants = {
   }),
 };
 
-export default function DashboardCard({ children, index }: DashboardCardProps) {
+export function DashboardCard({ children, index, className = '' }: DashboardCardProps) {
   return (
     <motion.div
       custom={index}
       initial="hidden"
       animate="visible"
       variants={cardVariants}
-      className="min-h-[280px] flex flex-col justify-between bg-muted/20 border border-border p-6 rounded-2xl shadow-sm hover:shadow-lg hover:scale-[1.02] transition-transform"
+      className={`min-h-[280px] flex flex-col justify-between bg-muted/20 border border-border p-6 rounded-2xl shadow-sm hover:shadow-lg hover:scale-[1.02] transition-transform ${className}`}
     >
       {children}
     </motion.div>
   );
 }
+
+export default DashboardCard;

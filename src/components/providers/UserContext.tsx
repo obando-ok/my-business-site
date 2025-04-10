@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { User } from "@supabase/supabase-js";
 
 type UserContextType = {
   email: string | null;
@@ -9,11 +10,19 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType>({ email: null });
 
-export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
+interface UserContextProviderProps {
+  children: React.ReactNode;
+  user?: User | null;
+}
+
+export const UserContextProvider = ({ children, user }: UserContextProviderProps) => {
   const supabase = createClientComponentClient();
-  const [email, setEmail] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(user?.email || null);
 
   useEffect(() => {
+    // If user is already provided (from server components), don't fetch again
+    if (user) return;
+    
     const getSession = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (error) {
@@ -24,7 +33,7 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     };
 
     getSession();
-  }, [supabase]);
+  }, [supabase, user]);
 
   return (
     <UserContext.Provider value={{ email }}>

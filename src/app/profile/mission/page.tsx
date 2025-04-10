@@ -57,7 +57,9 @@ export default function MissionPage() {
       </div>
 
       {/* Full-width Streak Tracker */}
-      <StreakTracker />
+      <div className="hidden xl:block lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <StreakTracker instanceId="mission-page" />
+      </div>
     </section>
   );
 }

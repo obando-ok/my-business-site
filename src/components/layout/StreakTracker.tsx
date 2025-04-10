@@ -12,7 +12,11 @@ import toast from "react-hot-toast";
 const DAY_RANGES = [30, 60, 90];
 const colorLevels = ["bg-muted", "bg-accent/20", "bg-accent/40", "bg-accent/60", "bg-accent"];
 
-export default function StreakTracker() {
+interface StreakTrackerProps {
+  instanceId?: string;
+}
+
+export default function StreakTracker({ instanceId = 'default' }: StreakTrackerProps) {
   const { session } = useAuth();
   const [entryCounts, setEntryCounts] = useState<Record<string, number>>({});
   const [todayStreak, setTodayStreak] = useState(0);
@@ -107,7 +111,7 @@ export default function StreakTracker() {
 
       grid.push(
         <div
-          key={key}
+          key={`${instanceId}-${i}-${key}`}
           className={clsx(
             "w-4 h-4 rounded-sm border border-border",
             level,
@@ -145,7 +149,7 @@ export default function StreakTracker() {
               transition={{ duration: 0.5 }}
               className="px-3 py-1 text-xs rounded-full font-semibold bg-emerald-500/20 text-emerald-500 border border-emerald-500 shadow-sm"
             >
-              🔥 You’re on fire!
+              🔥 You're on fire!
             </motion.div>
           )}
         </div>
@@ -153,7 +157,7 @@ export default function StreakTracker() {
         <div className="flex justify-center gap-3">
           {DAY_RANGES.map((value) => (
             <button
-              key={value}
+              key={`${instanceId}-range-${value}`}
               onClick={() => setRange(value)}
               className={clsx(
                 "px-3 py-1 text-sm rounded-md border",

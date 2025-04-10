@@ -7,15 +7,39 @@ import QuestionStep from "./QuestionStep";
 import TraitSelector from "./TraitSelector";
 import FaithSelector from "./FaithSelector";
 import ReviewSummary from "./ReviewSummary";
+import AnimatedCard from "./AnimatedCard";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { ChevronLeft, ChevronRight, Save, Sparkles } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
+// Enhanced questions with more details
 const questions = [
-  "What are your main goals right now?",
-  "What habits are holding you back?",
-  "What qualities do you want to develop?",
-  "Describe your ideal daily routine.",
-  "What motivates you to improve?",
+  {
+    id: "goals",
+    text: "What are your main goals right now?",
+    placeholder: "Think about specific targets you want to achieve in your personal development journey."
+  },
+  {
+    id: "obstacles",
+    text: "What habits are holding you back?",
+    placeholder: "Consider behaviors or thought patterns that might be limiting your growth."
+  },
+  {
+    id: "qualities",
+    text: "What qualities do you want to develop?",
+    placeholder: "Reflect on character traits or skills you'd like to strengthen."
+  },
+  {
+    id: "routine",
+    text: "Describe your ideal daily routine.",
+    placeholder: "Envision what a perfect, productive day would look like for you."
+  },
+  {
+    id: "motivation",
+    text: "What motivates you to improve?",
+    placeholder: "Consider your deeper 'why' that will sustain you through challenges."
+  },
 ];
 
 const totalSteps = questions.length + 3;
@@ -26,9 +50,12 @@ export default function EvaluationForm() {
   const [selectedTraits, setSelectedTraits] = useState<string[]>([]);
   const [faith, setFaith] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [saveProgress, setSaveProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   const progress = Math.floor((step / (totalSteps - 1)) * 100);
 
@@ -36,7 +63,7 @@ export default function EvaluationForm() {
     containerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [step]);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step < questions.length && !answers[step].trim()) {
       setError("Please provide an answer before proceeding.");
       return;
@@ -50,10 +77,13 @@ export default function EvaluationForm() {
       return;
     }
     setError(null);
+    
     if (step < totalSteps - 1) {
+      // Auto-save progress
+      await saveFormProgress();
       setStep(step + 1);
     } else {
-      setSubmitted(true);
+      await submitForm();
     }
   };
 
@@ -62,11 +92,45 @@ export default function EvaluationForm() {
     setError(null);
   };
 
+  const saveFormProgress = async () => {
+    // Simulate saving progress to server
+    setIsProcessing(true);
+    
+    // Fake progress animation
+    for (let i = 0; i <= 100; i += 20) {
+      setSaveProgress(i);
+      await new Promise(r => setTimeout(r, 100));
+    }
+    
+    setIsProcessing(false);
+    setSaveProgress(0);
+    
+    toast({
+      title: "Progress saved",
+      description: "Your answers have been saved.",
+      duration: 2000,
+    });
+  };
+
+  const submitForm = async () => {
+    setIsProcessing(true);
+    
+    // Simulate API call
+    for (let i = 0; i <= 100; i += 5) {
+      setSaveProgress(i);
+      await new Promise(r => setTimeout(r, 50));
+    }
+    
+    setIsProcessing(false);
+    setSaveProgress(0);
+    setSubmitted(true);
+  };
+
   const renderStep = () => {
     if (step < questions.length) {
       return (
         <QuestionStep
-          question={questions[step]}
+          question={questions[step].text}
           answer={answers[step]}
           onChange={(val) => {
             const updated = [...answers];
@@ -99,7 +163,7 @@ export default function EvaluationForm() {
 
     return (
       <ReviewSummary
-        questions={questions}
+        questions={questions.map(q => q.text)}
         answers={answers}
         traits={selectedTraits}
         faith={faith}
@@ -134,13 +198,15 @@ export default function EvaluationForm() {
           Step {step + 1} of {totalSteps} — {progress}% Complete
         </div>
 
-        <motion.div
-          key={step}
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -15 }}
-          transition={{ duration: 0.3 }}
-          className="bg-white/5 border border-border rounded-xl p-6 shadow-md backdrop-blur-sm space-y-6"
+        <AnimatedCard
+          key={`step-${step}`}
+          variant={step === totalSteps - 1 ? "highlight" : "default"}
+          className="p-6 space-y-6"
+          transition={{ 
+            type: "spring", 
+            stiffness: 300, 
+            damping: 30 
+          }}
         >
           {!submitted ? (
             <>
@@ -148,7 +214,7 @@ export default function EvaluationForm() {
 
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={`step-${step}`}
+                  key={`step-content-${step}`}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
@@ -156,22 +222,49 @@ export default function EvaluationForm() {
                 >
                   {renderStep()}
                   {error && (
-                    <p className="mt-3 text-sm text-red-500 font-medium">
+                    <motion.p 
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="mt-3 text-sm text-red-500 font-medium flex items-center"
+                    >
+                      <Sparkles className="w-3 h-3 mr-1" />
                       {error}
-                    </p>
+                    </motion.p>
                   )}
                 </motion.div>
               </AnimatePresence>
 
-              <div className="flex justify-between pt-6">
-                <Button variant="ghost" onClick={handleBack} disabled={step === 0}>
+              <div className="flex justify-between pt-6 items-center">
+                <Button 
+                  variant="ghost" 
+                  onClick={handleBack} 
+                  disabled={step === 0 || isProcessing}
+                  className="gap-1"
+                >
+                  <ChevronLeft className="w-4 h-4" />
                   Back
                 </Button>
+                
+                <div className="text-xs text-muted-foreground">
+                  {isProcessing && `Saving... ${saveProgress}%`}
+                </div>
+                
                 <Button
                   onClick={handleNext}
-                  disabled={step < questions.length && !answers[step].trim()}
+                  disabled={(step < questions.length && !answers[step].trim()) || isProcessing}
+                  className="gap-1"
                 >
-                  {step === totalSteps - 1 ? "Finish" : "Next Step"}
+                  {step === totalSteps - 1 ? (
+                    <>
+                      <Save className="w-4 h-4" />
+                      Complete
+                    </>
+                  ) : (
+                    <>
+                      Next Step
+                      <ChevronRight className="w-4 h-4" />
+                    </>
+                  )}
                 </Button>
               </div>
             </>
@@ -188,7 +281,9 @@ export default function EvaluationForm() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="text-4xl">🎯</div>
+                <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-4xl">
+                  🎯
+                </div>
                 <h2 className="text-2xl font-bold text-primary tracking-tight">
                   Mission Logged
                 </h2>
@@ -234,7 +329,7 @@ export default function EvaluationForm() {
               </motion.div>
             </motion.div>
           )}
-        </motion.div>
+        </AnimatedCard>
       </div>
     </section>
   );
